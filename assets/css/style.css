@@ -13,3 +13,16 @@ img {
     height:200px;
     width:140px;
 }
+
+
+.thumbnail {
+    position: relative;
+}
+
+.caption {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 0, 0, 0.507);
+}

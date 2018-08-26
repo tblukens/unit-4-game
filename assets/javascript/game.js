@@ -4,6 +4,8 @@ var dbzObject = {
 
     // setup variables for characters and health, attack etc...
     characterSelected: false,
+    characterSelectedValue: "",
+    enemySelectedValue: "",
     enemySelected: false,
     hasAttacked: false,
     hasDefeated: false,
@@ -13,25 +15,21 @@ var dbzObject = {
     characterListArray: [
         {
             name: 'Goku',
-            characterImage: './assets/images/goku.png',
             healthPoints: 160,
             attackPower: 10,
         },
         {
             name: 'Krillin',
-            characterImage: './assets/images/Krillin.png',
             healthPoints: 180,
             attackPower: 7,
         },
         {
             name: 'Piccolo',
-            characterImage: './assets/images/piccolo.png',
             healthPoints: 130,
             attackPower: 15,
         },
         {
             name: 'Vegeta',
-            characterImage: './assets/images/vegeta.png',
             healthPoints: 180,
             attackPower: 15,
         },
@@ -42,10 +40,10 @@ var dbzObject = {
     displayCharacterSelect: function () {
 
         // this.characterListArray.forEach(function(){
-        //     var newCharacterDiv = $("<img>");
-        // newCharacterDiv.attr("src", "./assets/images/" + this.characterListArray.name + ".png");
-        // newCharacterDiv.class("col-2 character-image");
-        //     $("#character-select").append(newCharacterDiv);
+        //     var newCharacterDivImg = $("<img>");
+        // newCharacterDivImg.attr("src", "./assets/images/" + this.characterListArray.name + ".png");
+        // newCharacterDivImg.class("col-2 character-image");
+        //     $("#character-select").append(newCharacterDivImg);
         //     console.log(dbzObject.characterListArray[name]);
 
         // })
@@ -53,11 +51,27 @@ var dbzObject = {
         for (let i = 0; i < this.characterListArray.length; i++) {
             const element = this.characterListArray[i].name;
             console.log(element);
-            var newCharacterDiv = $("<img>");
-            newCharacterDiv.attr("src", "./assets/images/" + this.characterListArray[i].name.toLowerCase() + ".png");
-            newCharacterDiv.addClass("col-3 character-image border border-danger ");
-            newCharacterDiv.attr("value", this.characterListArray[i].name)
-            $("#character-select").append(newCharacterDiv);
+            var newCharacterDiv = $("<div>");
+            newCharacterDiv.addClass("thumbnail d-inline text-center");
+            newCharacterDiv.attr({
+                id: this.characterListArray[i].name + "-div",
+                value: this.characterListArray[i].name
+            });
+            $("#character-select").append(newCharacterDiv)
+            var newCharacterDivImg = $("<img>");
+            newCharacterDivImg.attr("src", "./assets/images/" + this.characterListArray[i].name.toLowerCase() + ".png");
+            newCharacterDivImg.addClass("col-3 character-image border border-danger ");
+            newCharacterDivImg.attr({
+                id: this.characterListArray[i].name,
+                value: this.characterListArray[i].name,
+                alt: this.characterListArray[i].name
+            });
+            $("#" + this.characterListArray[i].name + "-div").append(newCharacterDivImg);
+            var newCharacterDivInfo = $("<div>");
+            newCharacterDivInfo.addClass("caption border-top border-bottom border-info");
+            newCharacterDivInfo.attr("id", this.characterListArray[i].name + "-info");
+            newCharacterDivInfo.text(this.characterListArray[i].healthPoints);
+            $("#" + this.characterListArray[i].name + "-div").append(newCharacterDivInfo);
 
         }
 
@@ -66,34 +80,164 @@ var dbzObject = {
     // when a character is selected move selected character to "#your-character"
     playerSelectedCharacter: function () {
         if (this.characterSelected === false) {
+            var moveGokuEnemy = function () {
+                $("#Goku-div").detach().appendTo("#available-enemies");
+                $("#Goku").detach().appendTo("#Goku-div");
+                $("#Goku-info").detach().appendTo("#Goku-div");
+            }
+            var moveKrillinEnemy = function () {
+                $("#Krillin-div").detach().appendTo("#available-enemies");
+                $("#Krillin").detach().appendTo("#Krillin-div");
+                $("#Krillin-info").detach().appendTo("#Krillin-div");
+            }
+
+            var movePiccoloEnemy = function () {
+                $("#Piccolo-div").detach().appendTo("#available-enemies");
+                $("#Piccolo").detach().appendTo("#Piccolo-div");
+                $("#Piccolo-info").detach().appendTo("#Piccolo-div");
+            }
+
+            var moveVegetaEnemy = function () {
+                $("#Vegeta-div").detach().appendTo("#available-enemies");
+                $("#Vegeta").detach().appendTo("#Vegeta-div");
+                $("#Vegeta-info").detach().appendTo("#Vegeta-div");
+            }
+
+
             $(".character-image").on("click", function () {
                 if ($(this).attr("value") === "Goku") {
-                    $(this).detach().appendTo("#your-character");
+                    $("#Goku-div").detach().appendTo("#your-character");
+                    $(this).detach().appendTo("#Goku-div");
+                    $("#Goku-info").detach().appendTo("#Goku-div");
+                    $(this).removeClass("character-image");
+                    dbzObject.characterSelectedValue = "Goku";
+                    if (dbzObject.characterSelected === false) {
+                        moveKrillinEnemy();
+                        movePiccoloEnemy();
+                        moveVegetaEnemy();
+                    }
                 } else if ($(this).attr("value") === "Krillin") {
-                    $(this).detach().appendTo("#your-character");
+                    $("#Krillin-div").detach().appendTo("#your-character");
+                    $(this).detach().appendTo("#Krillin-div");
+                    $("#Krillin-info").detach().appendTo("#Krillin-div");
+                    $(this).removeClass("character-image");
+                    dbzObject.characterSelectedValue = "Krillin";
+                    $(".character-image").detach().appendTo("#available-enemies");
+                    if (dbzObject.characterSelected === false) {
+                        moveGokuEnemy();
+                        movePiccoloEnemy();
+                        moveVegetaEnemy();
+                    }
                 } else if ($(this).attr("value") === "Piccolo") {
-                    $(this).detach().appendTo("#your-character");
+                    $("#Piccolo-div").detach().appendTo("#your-character");
+                    $(this).detach().appendTo("#Piccolo-div");
+                    $("#Piccolo-info").detach().appendTo("#Piccolo-div");
+                    $(this).removeClass("character-image");
+                    dbzObject.characterSelectedValue = "Piccolo";
+                    $(".character-image").detach().appendTo("#available-enemies");
+                    if (dbzObject.characterSelected === false) {
+                        moveGokuEnemy();
+                        moveKrillinEnemy();
+                        moveVegetaEnemy();
+                    }
                 } else if ($(this).attr("value") === "Vegeta") {
-                    $(this).detach().appendTo("#your-character");
+                    $("#Vegeta-div").detach().appendTo("#your-character");
+                    $(this).detach().appendTo("#Vegeta-div");
+                    $("#Vegeta-info").detach().appendTo("#Vegeta-div");
+                    $(this).removeClass("character-image");
+                    dbzObject.characterSelectedValue = "Vegeta";
+                    $(".character-image").detach().appendTo("#available-enemies");
+                    if (dbzObject.characterSelected === false) {
+                        moveGokuEnemy();
+                        movePiccoloEnemy();
+                        moveKrillinEnemy();
+                    }
                 }
 
-                this.characterSelected = true;
+                dbzObject.characterSelected = true;
+                if (dbzObject.enemySelected === false) {
+                    dbzObject.enemySelect1();
+                } else if (dbzObject.enemySelected === true) {
+                    return false;
+                }
 
-                console.log("peppers")
-            })
+
+
+                console.log(dbzObject.characterSelected)
+            });
         } else if (this.characterSelected === true) {
             return false;
         }
-    }
-
-    // also move enemies available to "#available-enemies"
+    },
 
     // when an enemy is selected move selection to "#defender"
+    // also move enemies available to "#available-enemies"
+    enemySelect1: function () {
+        if (this.enemySelected === false) {
+            $(".character-image").off();
+            $(".character-image").on("click", function () {
+                if ($(this).attr("value") === "Goku") {
+                    $("#Goku-div").detach().appendTo("#defender");
+                    $(this).detach().appendTo("#Goku-div");
+                    $("#Goku-info").detach().appendTo("#Goku-div");
+                    // $(".character-image").removeClass("character-image");
+                    dbzObject.enemySelectedValue = "Goku";
+                } else if ($(this).attr("value") === "Krillin") {
+                    $("#Krillin-div").detach().appendTo("#defender");
+                    $(this).detach().appendTo("#Krillin-div");
+                    $("#Krillin-info").detach().appendTo("#Krillin-div");
+                    // $(".character-image").removeClass("character-image");
+                    dbzObject.enemySelectedValue = "Krillin";
+                } else if ($(this).attr("value") === "Piccolo") {
+                    $("#Piccolo-div").detach().appendTo("#defender");
+                    $(this).detach().appendTo("#Piccolo-div");
+                    $("#Piccolo-info").detach().appendTo("#Piccolo-div");
+                    // $(".character-image").removeClass("character-image");
+                    dbzObject.enemySelectedValue = "Piccolo";
+                } else if ($(this).attr("value") === "Vegeta") {
+                    $("#Vegeta-div").detach().appendTo("#defender");
+                    $(this).detach().appendTo("#Vegeta-div");
+                    $("#Vegeta-info").detach().appendTo("#Vegeta-div");
+                    // $(".character-image").removeClass("character-image");
+                    dbzObject.enemySelectedValue = "Vegeta";
+                }
+
+                dbzObject.enemySelected = true;
+                dbzObject.battleFunction();
+
+                // console.log("peppers")
+            });
+        } else if (this.enemySelected === true) {
+            dbzObject.TEST();
+            return false;
+        }
+    },
+    TEST: function () {
+        this.enemySelected = true;
+        if (dbzObject.enemySelected === true) {
+            $(".character-image").on("click", function(){
+                return false;
+            });
+
+        }
+    },
 
     // when #attack button is clicked factor damage and change variables accordingly
     // NOTE: chosen characters damage goes up by base amount each attack
     // NOTE: enemies damage is constant
     // show damage in #flavor-text
+    battleFunction: function () {
+        $(".character-image").off();
+        $("#attack").on("click", function(){
+            if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Krillin") {
+                dbzObject.characterListArray[0].healthPoints = dbzObject.characterListArray[0].healthPoints - dbzObject.characterListArray[1].attackPower;
+                console.log(dbzObject.characterListArray[0].healthPoints);
+                
+            }
+        });
+    }
+
+
 
     // if defender wins - game over
     // else continue with next enemy
@@ -112,7 +256,9 @@ var dbzObject = {
 dbzObject.displayCharacterSelect();
 if (dbzObject.characterSelected === false) {
     dbzObject.playerSelectedCharacter();
-} else {
+}
+
+if (dbzObject.characterSelected === true && dbzObject.enemySelected === false) {
     console.log("peppers");
 }
 
@@ -120,10 +266,10 @@ $(document).ready(function () {
 
     // dbzObject.displayCharacterSelect();
     // for (let i = 0; i < dbzObject.characterListArray.length; i++) {
-    //     var newCharacterDiv = $("<div>");
-    //     newCharacterDiv.addClass("character-image");
-    //     newCharacterDiv.setAttribute("src", "./assets/images/" + i + ".png");
-    //     $("#character-select").append(newCharacterDiv);
+    //     var newCharacterDivImg = $("<div>");
+    //     newCharacterDivImg.addClass("character-image");
+    //     newCharacterDivImg.setAttribute("src", "./assets/images/" + i + ".png");
+    //     $("#character-select").append(newCharacterDivImg);
 
     // }
 
