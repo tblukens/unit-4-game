@@ -43,11 +43,11 @@ var dbzObject = {
 
         // this.characterListArray.forEach(function(){
         //     var newCharacterDiv = $("<img>");
-            // newCharacterDiv.attr("src", "./assets/images/" + this.characterListArray.name + ".png");
-            // newCharacterDiv.class("col-2 character-image");
+        // newCharacterDiv.attr("src", "./assets/images/" + this.characterListArray.name + ".png");
+        // newCharacterDiv.class("col-2 character-image");
         //     $("#character-select").append(newCharacterDiv);
         //     console.log(dbzObject.characterListArray[name]);
-            
+
         // })
 
         for (let i = 0; i < this.characterListArray.length; i++) {
@@ -58,14 +58,32 @@ var dbzObject = {
             newCharacterDiv.addClass("col-3 character-image border border-danger ");
             newCharacterDiv.attr("value", this.characterListArray[i].name)
             $("#character-select").append(newCharacterDiv);
-            
+
         }
 
     },
-    
+
     // when a character is selected move selected character to "#your-character"
-    playerSelectedCharacter: function(){
-        
+    playerSelectedCharacter: function () {
+        if (this.characterSelected === false) {
+            $(".character-image").on("click", function () {
+                if ($(this).attr("value") === "Goku") {
+                    $(this).detach().appendTo("#your-character");
+                } else if ($(this).attr("value") === "Krillin") {
+                    $(this).detach().appendTo("#your-character");
+                } else if ($(this).attr("value") === "Piccolo") {
+                    $(this).detach().appendTo("#your-character");
+                } else if ($(this).attr("value") === "Vegeta") {
+                    $(this).detach().appendTo("#your-character");
+                }
+
+                this.characterSelected = true;
+
+                console.log("peppers")
+            })
+        } else if (this.characterSelected === true) {
+            return false;
+        }
     }
 
     // also move enemies available to "#available-enemies"
@@ -92,6 +110,11 @@ var dbzObject = {
 
 
 dbzObject.displayCharacterSelect();
+if (dbzObject.characterSelected === false) {
+    dbzObject.playerSelectedCharacter();
+} else {
+    console.log("peppers");
+}
 
 $(document).ready(function () {
 
