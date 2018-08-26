@@ -8,3 +8,8 @@ html, body {
 #wrapper {
     margin: 0 auto;
 }
+
+img {
+    height:200px;
+    width:140px;
+}
