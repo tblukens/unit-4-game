@@ -17,21 +17,25 @@ var dbzObject = {
             name: 'Goku',
             healthPoints: 160,
             attackPower: 10,
+            constAttackPower: 10,
         },
         {
             name: 'Krillin',
             healthPoints: 180,
             attackPower: 7,
+            constAttackPower: 7,
         },
         {
             name: 'Piccolo',
             healthPoints: 130,
             attackPower: 15,
+            constAttackPower: 15,
         },
         {
             name: 'Vegeta',
             healthPoints: 180,
             attackPower: 15,
+            constAttackPower: 15,
         },
 
     ],
@@ -156,7 +160,7 @@ var dbzObject = {
 
                 dbzObject.characterSelected = true;
                 if (dbzObject.enemySelected === false) {
-                    dbzObject.enemySelect1();
+                    dbzObject.enemySelect();
                 } else if (dbzObject.enemySelected === true) {
                     return false;
                 }
@@ -172,7 +176,7 @@ var dbzObject = {
 
     // when an enemy is selected move selection to "#defender"
     // also move enemies available to "#available-enemies"
-    enemySelect1: function () {
+    enemySelect: function () {
         if (this.enemySelected === false) {
             $(".character-image").off();
             $(".character-image").on("click", function () {
@@ -215,7 +219,7 @@ var dbzObject = {
     TEST: function () {
         this.enemySelected = true;
         if (dbzObject.enemySelected === true) {
-            $(".character-image").on("click", function(){
+            $(".character-image").on("click", function () {
                 return false;
             });
 
@@ -228,11 +232,32 @@ var dbzObject = {
     // show damage in #flavor-text
     battleFunction: function () {
         $(".character-image").off();
-        $("#attack").on("click", function(){
+        $("#attack").on("click", function () {
             if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Krillin") {
                 dbzObject.characterListArray[0].healthPoints = dbzObject.characterListArray[0].healthPoints - dbzObject.characterListArray[1].attackPower;
+                if (dbzObject.hasAttacked === true) {
+                    dbzObject.characterListArray[0].attackPower = dbzObject.characterListArray[0].attackPower + dbzObject.characterListArray[0].constAttackPower;
+                    dbzObject.characterListArray[1].healthPoints = dbzObject.characterListArray[1].healthPoints - dbzObject.characterListArray[0].attackPower;
+                } else if (dbzObject.hasAttacked === false) {
+                    dbzObject.characterListArray[1].healthPoints = dbzObject.characterListArray[1].healthPoints - dbzObject.characterListArray[0].attackPower;
+                    dbzObject.hasAttacked = true;
+                }
                 console.log(dbzObject.characterListArray[0].healthPoints);
-                
+                console.log(dbzObject.characterListArray[1].healthPoints);
+                console.log(dbzObject.characterListArray[0].attackPower);
+                console.log(dbzObject.characterListArray[1].attackPower);
+                $("#flavor-text").html("<p>Goku dealt " + dbzObject.characterListArray[0].attackPower + " damage to Krillin!</p>" +
+                    "<p>Krillin dealt " + dbzObject.characterListArray[1].attackPower + " back to Goku!");
+                    $("#Goku-info").text(dbzObject.characterListArray[0].healthPoints);
+                    $("#Krillin-info").text(dbzObject.characterListArray[1].healthPoints);
+
+
+                if (dbzObject.characterListArray[1].healthPoints <= 0){
+                    $("#Krillin-div").remove();
+                    dbzObject.enemySelected = false;
+                    dbzObject.enemySelect();
+
+                }
             }
         });
     }
