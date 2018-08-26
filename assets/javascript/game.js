@@ -231,29 +231,59 @@ var dbzObject = {
     // NOTE: enemies damage is constant
     // show damage in #flavor-text
     battleFunction: function () {
+        var gokuHealth = this.characterListArray[0].healthPoints;
+        var gokuAttack = this.characterListArray[0].attackPower;
+        var gokuConstAttack = this.characterListArray[0].constAttackPower;
+        
+        var krillinHealth = this.characterListArray[1].healthPoints;
+        var krillinAttack = this.characterListArray[1].attackPower;
+        var krillinConstAttack = this.characterListArray[1].constAttackPower;
+        
+        var piccoloHealth = this.characterListArray[2].healthPoints;
+        var piccoloAttack = this.characterListArray[2].attackPower;
+        var piccoloConstAttack = this.characterListArray[2].constAttackPower;
+        
+        var vegetaHealth = this.characterListArray[3].healthPoints;
+        var vegetaAttack = this.characterListArray[3].attackPower;
+        var vegetaConstAttack = this.characterListArray[3].constAttackPower;
+
+        var battleFunctionFunction = function (a, b, c, d) {
+            a = a - c;
+            if (dbzObject.hasAttacked === true) {
+
+            } else if (dbzObject.hasAttacked === false) {
+                
+            }
+        }
+
+
         $(".character-image").off();
         $("#attack").on("click", function () {
             if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Krillin") {
-                dbzObject.characterListArray[0].healthPoints = dbzObject.characterListArray[0].healthPoints - dbzObject.characterListArray[1].attackPower;
+                // dbzObject.characterListArray[0].healthPoints = dbzObject.characterListArray[0].healthPoints - dbzObject.characterListArray[1].attackPower;
+                gokuHealth = gokuHealth - krillinAttack;
                 if (dbzObject.hasAttacked === true) {
-                    dbzObject.characterListArray[0].attackPower = dbzObject.characterListArray[0].attackPower + dbzObject.characterListArray[0].constAttackPower;
-                    dbzObject.characterListArray[1].healthPoints = dbzObject.characterListArray[1].healthPoints - dbzObject.characterListArray[0].attackPower;
+                    // dbzObject.characterListArray[0].attackPower = dbzObject.characterListArray[0].attackPower + dbzObject.characterListArray[0].constAttackPower;
+                    gokuAttack = gokuAttack + gokuConstAttack;
+                    // dbzObject.characterListArray[1].healthPoints = dbzObject.characterListArray[1].healthPoints - dbzObject.characterListArray[0].attackPower;
+                    krillinHealth = krillinHealth - gokuAttack;
                 } else if (dbzObject.hasAttacked === false) {
-                    dbzObject.characterListArray[1].healthPoints = dbzObject.characterListArray[1].healthPoints - dbzObject.characterListArray[0].attackPower;
+                    // dbzObject.characterListArray[1].healthPoints = dbzObject.characterListArray[1].healthPoints - dbzObject.characterListArray[0].attackPower;
+                    krillinHealth = krillinHealth - gokuAttack;
                     dbzObject.hasAttacked = true;
                 }
-                console.log(dbzObject.characterListArray[0].healthPoints);
-                console.log(dbzObject.characterListArray[1].healthPoints);
-                console.log(dbzObject.characterListArray[0].attackPower);
-                console.log(dbzObject.characterListArray[1].attackPower);
-                $("#flavor-text").html("<p>Goku dealt " + dbzObject.characterListArray[0].attackPower + " damage to Krillin!</p>" +
-                    "<p>Krillin dealt " + dbzObject.characterListArray[1].attackPower + " back to Goku!");
-                    $("#Goku-info").text(dbzObject.characterListArray[0].healthPoints);
-                    $("#Krillin-info").text(dbzObject.characterListArray[1].healthPoints);
+                console.log(gokuHealth);
+                console.log(krillinHealth);
+                console.log(gokuAttack);
+                console.log(krillinAttack);
+                $("#flavor-text").html("<p>Goku dealt " + gokuAttack + " damage to Krillin!</p>" +
+                    "<p>Krillin dealt " + krillinAttack + " back to Goku!");
+                    $("#Goku-info").text(gokuHealth);
+                    $("#Krillin-info").text(krillinHealth);
 
-
-                if (dbzObject.characterListArray[1].healthPoints <= 0){
+                if (krillinHealth <= 0){
                     $("#Krillin-div").remove();
+                    dbzObject.enemySelectedValue = "";
                     dbzObject.enemySelected = false;
                     dbzObject.enemySelect();
 
