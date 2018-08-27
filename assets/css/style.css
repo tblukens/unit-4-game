@@ -42,3 +42,9 @@ img {
     width: 340px;
     height: 400px;
 }
+
+.winner-font {
+    font-weight: 900;
+    font-style: italic;
+    font-size: 1.3em;
+}
