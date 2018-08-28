@@ -391,12 +391,13 @@ var dbzObject = {
     },
     youWin: function () {
         dbzObject.gameOver = true;
-        $("#available-enemies, #defender, #attack").hide();
-        // $("#defender").hide();
+        $("#available-enemies, #attack, #defender").hide();
+        $("#flavor-text").removeClass("col-3");
+        // $("#defender").html("<p></p>");
         // $("#attack").hide();
         $("#resetDiv").html("<button type='button' class='btn btn-danger' id='reset'>Reset</button>")
         $("#flavor-text").html("<h1>YOU WIN! <span class='winner-font'>" + dbzObject.characterSelectedValue.toUpperCase() + "</span> IS THE GREATEST FIGHTER IN THE UNIVERSE");
-        $("#" + dbzObject.characterSelectedValue).removeClass("col-3").addClass("huge-img");
+        $("#" + dbzObject.characterSelectedValue).removeClass("col-3 player-character-image").addClass("huge-img");
         this.resetFunction();
 
     },
@@ -409,7 +410,8 @@ var dbzObject = {
 
         $("#reset").off().on("click", function () {
             $("#" + dbzObject.characterSelectedValue + "-div").empty();
-            $("#resetDiv, #flavor-text").empty();
+            $("#resetDiv, #flavor-text, #your-character, #available-enemies, #defender").empty();
+            $("#flavor-text").html("<p>Click a character to choose your fighter!</p>").addClass("col-3");
             $("#available-enemies, #defender, #attack").show();
             dbzObject.characterSelected = false;
             dbzObject.characterSelectedValue = "";
