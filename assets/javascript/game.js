@@ -76,9 +76,9 @@ var dbzObject = {
             });
             $("#" + this.characterListArray[i].name + "-div").append(newCharacterDivImg);
             var newCharacterDivInfo = $("<div>");
-            newCharacterDivInfo.addClass("caption border-top border-bottom border-info");
+            newCharacterDivInfo.addClass("caption border-top border-bottom border-warning");
             newCharacterDivInfo.attr("id", this.characterListArray[i].name + "-info");
-            newCharacterDivInfo.text(this.characterListArray[i].healthPoints);
+            newCharacterDivInfo.text(this.characterListArray[i].name + " " + this.characterListArray[i].healthPoints);
             $("#" + this.characterListArray[i].name + "-div").append(newCharacterDivInfo);
 
         }
@@ -265,8 +265,8 @@ var dbzObject = {
 
             $("#flavor-text").html("<p>" + dbzObject.characterSelectedValue + " dealt " + playerCharacter.attackPower + " damage to " + dbzObject.enemySelectedValue + "</p>" +
                 "<p>" + dbzObject.enemySelectedValue + " dealt " + defenderCharacter.counterAttack + " back to " + dbzObject.characterSelectedValue + "!");
-            $("#" + dbzObject.characterSelectedValue + "-info").text(playerCharacter.healthPoints);
-            $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.healthPoints);
+            $("#" + dbzObject.characterSelectedValue + "-info").text(playerCharacter.name + " " + playerCharacter.healthPoints);
+            $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.name + " " + defenderCharacter.healthPoints);
             if (defenderCharacter.healthPoints <= 0) {
                 dbzObject.enemyDefeated();
             }
@@ -327,8 +327,8 @@ var dbzObject = {
             $("#flavor-text").html("<p>You have defeated " + dbzObject.enemySelectedValue + "! Choose another enemy to continue!</p> <p>" +
                 dbzObject.characterSelectedValue + " dealt " + playerCharacter.attackPower + " damage to " + dbzObject.enemySelectedValue + "</p>" +
                 "<p>" + dbzObject.enemySelectedValue + " dealt " + defenderCharacter.counterAttack + " back to " + dbzObject.characterSelectedValue + "!");
-            $("#" + dbzObject.characterSelectedValue + "-info").text(playerCharacter.healthPoints);
-            $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.healthPoints);
+            $("#" + dbzObject.characterSelectedValue + "-info").text(playerCharacter.name + " " + playerCharacter.healthPoints);
+            $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.name + " " + defenderCharacter.healthPoints);
             dbzObject.enemySelectedValue = "";
             dbzObject.enemySelected = false;
             dbzObject.enemySelect();
