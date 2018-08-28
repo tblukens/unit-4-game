@@ -516,9 +516,42 @@ var dbzObject = {
         } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Vegeta") {
             console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
             enemyDefeatedFunction(gokuSelect, vegetaSelect);
+        } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Goku") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(krillinSelect, gokuSelect);
+        } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Piccolo") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(krillinSelect, piccoloSelect);
+        } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Vegeta") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(krillinSelect, vegetaSelect);
+        } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Goku") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(piccoloSelect, gokuSelect);
+        } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Krillin") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(piccoloSelect, krillinSelect);
+        } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Vegeta") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(piccoloSelect, vegetaSelect);
+        } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Goku") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(vegetaSelect, gokuSelect);
+        } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Krillin") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(vegetaSelect, krillinSelect);
+        } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Piccolo") {
+            console.log(dbzObject.characterSelectedValue, dbzObject.enemySelectedValue);
+            enemyDefeatedFunction(vegetaSelect, piccoloSelect);
         }
         if (gokuSelect.healthPoints > 0 && krillinSelect.healthPoints <= 0 && piccoloSelect.healthPoints <= 0 && vegetaSelect.healthPoints <= 0) {
-            dbzObject.youWin();
+            this.youWin();
+        } else if (krillinSelect.healthPoints > 0 && gokuSelect.healthPoints <= 0 && piccoloSelect.healthPoints <= 0 && vegetaSelect.healthPoints <= 0){
+            this.youWin();
+        } else if (piccoloSelect.healthPoints > 0 && gokuSelect.healthPoints <= 0 && krillinSelect.healthPoints <= 0 && vegetaSelect.healthPoints <= 0){
+            this.youWin();
+        } else if (vegetaSelect.healthPoints > 0 && gokuSelect.healthPoints <= 0 && krillinSelect.healthPoints <= 0 && piccoloSelect.healthPoints <= 0){
+            this.youWin();
         }
         // if (dbzObject.characterListArray[0].healthPoints > 0 && dbzObject.characterListArray[1].healthPoints <= 0 && dbzObject.characterListArray[2].healthPoints <= 0 && dbzObject.characterListArray[3].healthPoints <= 0) {
         //     dbzObject.youWin();
