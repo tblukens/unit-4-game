@@ -10,12 +10,12 @@ html, body {
 }
 
 img {
-    height:200px;
-    width:140px;
+    height: 240px;
+    /* width: 280px; */
 }
 
-.jumbotron {
-    height: 100px;
+/* .jumbotron {
+    height: 120px;
     font-size: 4em;
     font-weight: 900;
     padding-bottom: 0;
@@ -24,7 +24,7 @@ img {
 .jumbotron h1 {
     margin: 0 auto;
     padding: 0;
-}
+} */
 
 .thumbnail {
     position: relative;
@@ -37,6 +37,28 @@ img {
     width: 100%;
     background: rgba(255, 0, 0, 0.507);
 }
+
+img.character-image {
+    width: 215px;
+    height: 240px;
+}
+img.defender-character-image {
+    width: 215px;
+    height: 240px;
+    background: darkred;
+}
+img.player-character-image {
+    width: 215px;
+    height: 240px;
+    background: goldenrod;
+}
+img.enemies-available {
+    width: 215px;
+    height: 240px;
+    background: red;
+}
+
+
 
 .huge-img {
     width: 340px;
