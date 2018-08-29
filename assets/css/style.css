@@ -34,6 +34,11 @@ img {
     position: relative;
 }
 
+.charName {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 .caption {
     position: absolute;
     top: 65px;
