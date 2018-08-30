@@ -13,44 +13,43 @@ var dbzObject = {
     gameOver: false,
     freshGame: true,
     characterListArray: [{
-        name: 'Goku',
-        healthPoints: 145,
-        resetHP: 145,
-        attackPower: 12,
-        constAttackPower: 12,
-        counterAttack: 14,
-    },
-    {
-        name: 'Krillin',
-        healthPoints: 180,
-        resetHP: 180,
-        attackPower: 10,
-        constAttackPower: 10,
-        counterAttack: 12,
-    },
-    {
-        name: 'Piccolo',
-        healthPoints: 130,
-        resetHP: 130,
-        attackPower: 14,
-        constAttackPower: 14,
-        counterAttack: 16,
-    },
-    {
-        name: 'Vegeta',
-        healthPoints: 120,
-        resetHP: 120,
-        attackPower: 16,
-        constAttackPower: 16,
-        counterAttack: 18,
-    },
+            name: 'Goku',
+            healthPoints: 145,
+            resetHP: 145,
+            attackPower: 12,
+            constAttackPower: 12,
+            counterAttack: 14,
+        },
+        {
+            name: 'Krillin',
+            healthPoints: 180,
+            resetHP: 180,
+            attackPower: 10,
+            constAttackPower: 10,
+            counterAttack: 12,
+        },
+        {
+            name: 'Piccolo',
+            healthPoints: 130,
+            resetHP: 130,
+            attackPower: 14,
+            constAttackPower: 14,
+            counterAttack: 16,
+        },
+        {
+            name: 'Vegeta',
+            healthPoints: 120,
+            resetHP: 120,
+            attackPower: 16,
+            constAttackPower: 16,
+            counterAttack: 18,
+        },
 
 
     ],
     attackAudio: [{
 
-    }
-    ],
+    }],
     // gokuSelect: this.characterListArray[0],
     // krillinSelect: this.characterListArray[1],
     // piccoloSelect: this.characterListArray[2],
@@ -127,7 +126,9 @@ var dbzObject = {
                     $(this).detach().appendTo("#Goku-div");
                     $("#Goku-info").detach().appendTo("#Goku-div");
                     $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) { $(this).addClass("player-character-image"); }
+                    if (dbzObject.freshGame === true) {
+                        $(this).addClass("player-character-image");
+                    }
                     dbzObject.characterSelectedValue = "Goku";
                     if (dbzObject.characterSelected === false) {
                         moveKrillinEnemy();
@@ -139,7 +140,9 @@ var dbzObject = {
                     $(this).detach().appendTo("#Krillin-div");
                     $("#Krillin-info").detach().appendTo("#Krillin-div");
                     $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) { $(this).addClass("player-character-image"); }
+                    if (dbzObject.freshGame === true) {
+                        $(this).addClass("player-character-image");
+                    }
                     dbzObject.characterSelectedValue = "Krillin";
                     $(".character-image").detach().appendTo("#available-enemies");
                     if (dbzObject.characterSelected === false) {
@@ -152,7 +155,9 @@ var dbzObject = {
                     $(this).detach().appendTo("#Piccolo-div");
                     $("#Piccolo-info").detach().appendTo("#Piccolo-div");
                     $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) { $(this).addClass("player-character-image"); }
+                    if (dbzObject.freshGame === true) {
+                        $(this).addClass("player-character-image");
+                    }
                     dbzObject.characterSelectedValue = "Piccolo";
                     $(".character-image").detach().appendTo("#available-enemies");
                     if (dbzObject.characterSelected === false) {
@@ -165,7 +170,9 @@ var dbzObject = {
                     $(this).detach().appendTo("#Vegeta-div");
                     $("#Vegeta-info").detach().appendTo("#Vegeta-div");
                     $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) { $(this).addClass("player-character-image"); }
+                    if (dbzObject.freshGame === true) {
+                        $(this).addClass("player-character-image");
+                    }
                     dbzObject.characterSelectedValue = "Vegeta";
                     $(".character-image").detach().appendTo("#available-enemies");
                     if (dbzObject.characterSelected === false) {
@@ -238,7 +245,8 @@ var dbzObject = {
                 dbzObject.battleFunction();
 
             });
-        } return;
+        }
+        return;
     },
 
     // when #attack button is clicked factor damage and change variables accordingly
@@ -266,7 +274,11 @@ var dbzObject = {
             console.log(playerCharacter.name + " " + playerCharacter.attackPower + " " + playerCharacter.healthPoints);
             console.log(defenderCharacter.name + " " + defenderCharacter.attackPower + " " + defenderCharacter.healthPoints);
             console.log(dbzObject.hasAttacked);
-            console.log(dbzObject.hasDefeated)
+            console.log(dbzObject.hasDefeated);
+
+
+
+
 
             $("#flavor-text").html("<p>" + dbzObject.characterSelectedValue + " dealt " + playerCharacter.attackPower + " damage to " + dbzObject.enemySelectedValue + "</p>" +
                 "<p>" + dbzObject.enemySelectedValue + " dealt " + defenderCharacter.counterAttack + " back to " + dbzObject.characterSelectedValue + "!");
@@ -290,31 +302,112 @@ var dbzObject = {
         $("#attack").on("click", function () {
             if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Krillin") {
                 theRealBattleFunction(gokuSelect, krillinSelect);
+                dbzObject.battleAnimations(gokuSelect, krillinSelect);
             } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Piccolo") {
+                theRealBattleFunction(gokuSelect, piccoloSelect);
                 theRealBattleFunction(gokuSelect, piccoloSelect);
             } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(gokuSelect, vegetaSelect);
+                theRealBattleFunction(gokuSelect, vegetaSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Goku") {
+                theRealBattleFunction(krillinSelect, gokuSelect);
                 theRealBattleFunction(krillinSelect, gokuSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Piccolo") {
                 theRealBattleFunction(krillinSelect, piccoloSelect);
+                theRealBattleFunction(krillinSelect, piccoloSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Vegeta") {
+                theRealBattleFunction(krillinSelect, vegetaSelect);
                 theRealBattleFunction(krillinSelect, vegetaSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(piccoloSelect, gokuSelect);
+                theRealBattleFunction(piccoloSelect, gokuSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Krillin") {
+                theRealBattleFunction(piccoloSelect, krillinSelect);
                 theRealBattleFunction(piccoloSelect, krillinSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(piccoloSelect, vegetaSelect);
+                theRealBattleFunction(piccoloSelect, vegetaSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Goku") {
+                theRealBattleFunction(vegetaSelect, gokuSelect);
                 theRealBattleFunction(vegetaSelect, gokuSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Krillin") {
                 theRealBattleFunction(vegetaSelect, krillinSelect);
+                theRealBattleFunction(vegetaSelect, krillinSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Piccolo") {
+                theRealBattleFunction(vegetaSelect, piccoloSelect);
                 theRealBattleFunction(vegetaSelect, piccoloSelect);
             }
         });
         return;
+    },
+
+    battleAnimations: function (playerCharacter, defenderCharacter) {
+
+        var enemyAnimate = $("#defender");
+        var playerAnimate = $("#your-character");
+
+        if (playerCharacter.healthPoints > 0 && defenderCharacter.healthPoints > 0) {
+            playerAnimate.animate({
+                left: '50px'
+            }, 100, 'linear');
+
+            enemyAnimate.delay(250).animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear');
+
+            enemyAnimate.delay(550).animate({
+                left: '-50px'
+            }, 100, 'linear');
+
+            playerAnimate.delay(1200).animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear');
+        } else if (defenderCharacter.healthPoints <= 0) {
+            playerAnimate.animate({
+                left: '100px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear');
+            $("#" + defenderCharacter.name + "-div," + " #" + defenderCharacter.name + ", #" + defenderCharacter.name + "-info").delay(100).animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').animate({
+                left: '12px'
+            }, 50, 'linear').animate({
+                left: '0px'
+            }, 50, 'linear').fadeOut(600);
+
+            console.log(defenderCharacter.name);
+            console.log("#" + defenderCharacter.name + "-info");
+        }
+
+        return;
+
     },
     // if defender wins - game over
     // else continue with next enemy
@@ -325,7 +418,7 @@ var dbzObject = {
         var piccoloSelect = this.characterListArray[2];
         var vegetaSelect = this.characterListArray[3];
         // when defender loses remove them
-        $("#" + this.enemySelectedValue + "-div").remove();
+        // $("#" + this.enemySelectedValue + "-div").remove();
         this.hasAttacked = false;
         this.hasDefeated = true;
         // show that the enemy is defeated in #flavor-text and to choose another enemy
@@ -458,6 +551,8 @@ var dbzObject = {
 
 
 $(document).ready(function () {
+
+
 
     dbzObject.displayCharacterSelect();
     if (dbzObject.characterSelected === false) {
