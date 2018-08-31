@@ -26,35 +26,35 @@ var defenderCharacter3HTML;
 
 var characters = [{
     name: 'Goku',
-    healthPoints: 145,
-    resetHP: 145,
-    attackPower: 12,
-    constAttackPower: 12,
-    counterAttack: 14,
+    healthPoints: 1500,
+    resetHP: 1500,
+    attackPower: 135,
+    constAttackPower: 135,
+    counterAttack: 170,
 },
 {
     name: 'Krillin',
-    healthPoints: 180,
-    resetHP: 180,
-    attackPower: 10,
-    constAttackPower: 10,
-    counterAttack: 12,
+    healthPoints: 1625,
+    resetHP: 1625,
+    attackPower: 115,
+    constAttackPower: 115,
+    counterAttack: 130,
 },
 {
     name: 'Piccolo',
-    healthPoints: 130,
-    resetHP: 130,
-    attackPower: 14,
-    constAttackPower: 14,
-    counterAttack: 16,
+    healthPoints: 1500,
+    resetHP: 1500,
+    attackPower: 120,
+    constAttackPower: 120,
+    counterAttack: 160,
 },
 {
     name: 'Vegeta',
-    healthPoints: 120,
-    resetHP: 120,
-    attackPower: 16,
-    constAttackPower: 16,
-    counterAttack: 18,
+    healthPoints: 1225,
+    resetHP: 1225,
+    attackPower: 175,
+    constAttackPower: 175,
+    counterAttack: 195,
 },
 
 
@@ -77,9 +77,11 @@ var hasLost = false;
 var hasWonText = "Player won.";
 var hasLostText = "Player lost.";
 
+var hasClicked = false;
+
 
 $(function () {
-
+    $("#reset").hide();
     $("#setVariables").on("click", function () {
 
         //health points
@@ -124,14 +126,14 @@ $(function () {
 
 
     var theBattleFunction = function (playerCharacter, defenderCharacter1, defenderCharacter2, defenderCharacter3) {
-        var newRow = $("<div class='row text-center'>");
-        newRow.attr("id", playerCharacter.name+defenderCharacter1.name+defenderCharacter2.name+defenderCharacter3.name);
-        $("#main-container").append(newRow);
+        // var newRow = $("<div class='row text-center'>");
+        // newRow.attr("id", playerCharacter.name+defenderCharacter1.name+defenderCharacter2.name+defenderCharacter3.name);
+        // $("#main-container").append(newRow);
 
         playerHTML = playerCharacter.name;
-        defenderCharacter1HTML = defenderCharacter1.name;
-        defenderCharacter2HTML = defenderCharacter2.name;
-        defenderCharacter3HTML = defenderCharacter3.name;
+        defenderCharacter1HTML = defenderCharacter1.name+" | HP: "+defenderCharacter1.healthPoints;
+        defenderCharacter2HTML = defenderCharacter2.name+" | HP: "+defenderCharacter2.healthPoints;
+        defenderCharacter3HTML = defenderCharacter3.name+" | HP: "+defenderCharacter3.healthPoints;
         do {
             playerCharacter.healthPoints = playerCharacter.healthPoints - defenderCharacter1.counterAttack;
             if (hasAttacked === true) {
@@ -147,6 +149,7 @@ $(function () {
             console.log(defenderCharacter1.name + ": " + defenderCharacter1.healthPoints);
             console.log(playerCharacter.healthPoints);
             if (playerCharacter.healthPoints <= 0) {
+                playerHealthHTML = playerCharacter.healthPoints;
                 console.log("player died");
                 hasLost = true;
                 htmlInput();
@@ -171,6 +174,7 @@ $(function () {
                 console.log(defenderCharacter2.name + ": " + defenderCharacter2.healthPoints)
                 console.log(playerCharacter.attackPower);
                 if (playerCharacter.healthPoints <= 0) {
+                    playerHealthHTML = playerCharacter.healthPoints;
                     console.log("player died");
                     hasLost = true;
                     htmlInput();
@@ -195,6 +199,7 @@ $(function () {
                 console.log(defenderCharacter3.name + ": " + defenderCharacter3.healthPoints)
                 console.log(playerCharacter.attackPower + " ");
                 if (playerCharacter.healthPoints <= 0) {
+                    playerHealthHTML = playerCharacter.healthPoints;
                     console.log("player died");
                     hasLost = true;
                     htmlInput();
@@ -206,8 +211,8 @@ $(function () {
 
                 console.log(playerCharacter.attackPower);
                 console.log("Player has won!");
-                
-        playerHealthHTML = playerCharacter.healthPoints;
+
+                playerHealthHTML = playerCharacter.healthPoints;
                 hasWon = true;
                 htmlInput();
                 reset();
@@ -217,23 +222,23 @@ $(function () {
     };
 
     var htmlInput = function () {
-        var attachTo = $("#"+playerHTML+defenderCharacter1HTML+defenderCharacter2HTML+defenderCharacter3HTML);
-        newCol = $("<div class='col'>");
+        var attachTo = $("#" + playerHTML);
+        newCol = $("<div class='col border border-info m-2'>");
         if (hasWon) {
             newCol.html(
-                "<p>Player: " + playerHTML + " | Player HP:"+playerHealthHTML+"</p>" +
+                "<p>Player: " + playerHTML + " | Player HP:" + playerHealthHTML + "</p>" +
                 "<p>D1: " + defenderCharacter1HTML + "</p>" +
                 "<p>D2: " + defenderCharacter2HTML + "</p>" +
                 "<p>D3: " + defenderCharacter3HTML + "</p>" +
-                "<p>" + hasWonText + "</p>");
+                "<p class='won'>" + hasWonText + "</p>");
             $(attachTo).append(newCol);
         } else if (hasLost) {
             newCol.html(
-                "<p>Player: " + playerHTML + " | Player HP:"+playerHealthHTML+"</p>" +
+                "<p>Player: " + playerHTML + " | Player HP:" + playerHealthHTML + "</p>" +
                 "<p>D1: " + defenderCharacter1HTML + "</p>" +
                 "<p>D2: " + defenderCharacter2HTML + "</p>" +
                 "<p>D3: " + defenderCharacter3HTML + "</p>" +
-                "<p>" + hasLostText + "</p>");
+                "<p class='lost'>" + hasLostText + "</p>");
             $(attachTo).append(newCol);
         }
     }
@@ -252,7 +257,6 @@ $(function () {
         hasAttacked = false;
     };
 
-    
     $("#runFunction").on("click", function () {
         theBattleFunction(goku, krillin, piccolo, vegeta);
         theBattleFunction(goku, krillin, vegeta, piccolo);
@@ -260,6 +264,32 @@ $(function () {
         theBattleFunction(goku, piccolo, vegeta, krillin);
         theBattleFunction(goku, vegeta, krillin, piccolo);
         theBattleFunction(goku, vegeta, piccolo, krillin);
+        theBattleFunction(krillin, goku, piccolo, vegeta);
+        theBattleFunction(krillin, goku, vegeta, piccolo);
+        theBattleFunction(krillin, piccolo, goku, vegeta);
+        theBattleFunction(krillin, piccolo, vegeta, goku);
+        theBattleFunction(krillin, vegeta, goku, piccolo);
+        theBattleFunction(krillin, vegeta, piccolo, goku);
+        theBattleFunction(piccolo, goku, krillin, vegeta);
+        theBattleFunction(piccolo, goku, vegeta, krillin);
+        theBattleFunction(piccolo, krillin, goku, vegeta);
+        theBattleFunction(piccolo, krillin, vegeta, goku);
+        theBattleFunction(piccolo, vegeta, goku, krillin);
+        theBattleFunction(piccolo, vegeta, krillin, goku);
+        theBattleFunction(vegeta, goku, krillin, piccolo);
+        theBattleFunction(vegeta, goku, piccolo, krillin);
+        theBattleFunction(vegeta, krillin, goku, piccolo);
+        theBattleFunction(vegeta, krillin, piccolo, goku);
+        theBattleFunction(vegeta, piccolo, goku, krillin);
+        theBattleFunction(vegeta, piccolo, krillin, goku);
+        hasClicked = true;
+        $("#runDiv").hide();
+        $("#reset").show();
+    });
+    $("#reset").on("click", function (){
+        $("#reset").hide();
+        $("#runDiv").show();
+        $("#Goku, #Krillin, #Piccolo, #Vegeta").empty();
     });
 
 });

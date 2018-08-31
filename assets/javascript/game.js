@@ -13,37 +13,37 @@ var dbzObject = {
     gameOver: false,
     freshGame: true,
     characterListArray: [{
-            name: 'Goku',
-            healthPoints: 145,
-            resetHP: 145,
-            attackPower: 12,
-            constAttackPower: 12,
-            counterAttack: 14,
-        },
-        {
-            name: 'Krillin',
-            healthPoints: 180,
-            resetHP: 180,
-            attackPower: 10,
-            constAttackPower: 10,
-            counterAttack: 12,
-        },
-        {
-            name: 'Piccolo',
-            healthPoints: 130,
-            resetHP: 130,
-            attackPower: 14,
-            constAttackPower: 14,
-            counterAttack: 16,
-        },
-        {
-            name: 'Vegeta',
-            healthPoints: 120,
-            resetHP: 120,
-            attackPower: 16,
-            constAttackPower: 16,
-            counterAttack: 18,
-        },
+        name: 'Goku',
+        healthPoints: 14,
+        resetHP: 14,
+        attackPower: 12,
+        constAttackPower: 12,
+        counterAttack: 14,
+    },
+    {
+        name: 'Krillin',
+        healthPoints: 115,
+        resetHP: 115,
+        attackPower: 444,
+        constAttackPower: 444,
+        counterAttack: 444,
+    },
+    {
+        name: 'Piccolo',
+        healthPoints: 130,
+        resetHP: 130,
+        attackPower: 14,
+        constAttackPower: 14,
+        counterAttack: 16,
+    },
+    {
+        name: 'Vegeta',
+        healthPoints: 120,
+        resetHP: 120,
+        attackPower: 16,
+        constAttackPower: 16,
+        counterAttack: 18,
+    },
 
 
     ],
@@ -208,7 +208,7 @@ var dbzObject = {
             $("#flavor-text").text("Great choice! Now choose who to fight from the available enemies!")
         }
 
-        if (this.enemySelected === false && this.gameOver === false) {
+        if (this.enemySelected === false) {
             $(".character-image").off();
             $(".character-image").on("click", function () {
                 if ($(this).attr("value") === "Goku") {
@@ -217,28 +217,37 @@ var dbzObject = {
                     $("#Goku-info").detach().appendTo("#Goku-div");
                     dbzObject.enemySelectedValue = "Goku";
                     $(this).removeClass("character-image enemies-available");
-                    $(this).addClass("defender-character-image");
+                    if (dbzObject.gameOver === false) {
+                        $(this).addClass("defender-character-image");
+                    }
                 } else if ($(this).attr("value") === "Krillin") {
                     $("#Krillin-div").detach().appendTo("#defender");
                     $(this).detach().appendTo("#Krillin-div");
                     $("#Krillin-info").detach().appendTo("#Krillin-div");
                     dbzObject.enemySelectedValue = "Krillin";
                     $(this).removeClass("character-image enemies-available");
-                    $(this).addClass("defender-character-image");
+                    if (dbzObject.gameOver === false) {
+                        $(this).addClass("defender-character-image");
+                    }
                 } else if ($(this).attr("value") === "Piccolo") {
                     $("#Piccolo-div").detach().appendTo("#defender");
                     $(this).detach().appendTo("#Piccolo-div");
                     $("#Piccolo-info").detach().appendTo("#Piccolo-div");
                     dbzObject.enemySelectedValue = "Piccolo";
                     $(this).removeClass("character-image enemies-available");
-                    $(this).addClass("defender-character-image");
+                    if (dbzObject.gameOver === false) {
+                        $(this).addClass("defender-character-image");
+                    }
                 } else if ($(this).attr("value") === "Vegeta") {
                     $("#Vegeta-div").detach().appendTo("#defender");
                     $(this).detach().appendTo("#Vegeta-div");
                     $("#Vegeta-info").detach().appendTo("#Vegeta-div");
                     dbzObject.enemySelectedValue = "Vegeta";
                     $(this).removeClass("character-image enemies-available");
-                    $(this).addClass("defender-character-image");
+                    if (dbzObject.gameOver === false) {
+                        $(this).addClass("defender-character-image");
+                    }
+
                 }
 
                 dbzObject.enemySelected = true;
@@ -355,7 +364,9 @@ var dbzObject = {
         if (playerCharacter.healthPoints > 0 && defenderCharacter.healthPoints > 0) {
             playerAnimate.animate({
                 left: '50px'
-            }, 100, 'linear');
+            }, 100, 'linear').animate({
+                left: '-=50px'
+            }, 10, 'linear');
 
             enemyAnimate.delay(250).animate({
                 left: '12px'
@@ -373,7 +384,9 @@ var dbzObject = {
 
             enemyAnimate.delay(550).animate({
                 left: '-50px'
-            }, 100, 'linear');
+            }, 100, 'linear').animate({
+                left: '+=50px'
+            }, 10, 'linear');
 
             playerAnimate.delay(1200).animate({
                 left: '12px'
@@ -493,15 +506,17 @@ var dbzObject = {
         return;
     },
     youLose: function () {
+
+        $(".character-image").off();
         this.gameOver = true;
         this.enemySelected = true;
         $("#available-enemies, #attack, #your-character").hide();
-        $("#flavor-text").removeClass("col-3");
+        $("#flavor-text").removeClass("col-3").addClass("order-last");
         // $("#defender").html("<p></p>");
         // $("#attack").hide();
         $("#resetDiv").html("<button type='button' class='btn btn-danger' id='reset'>Reset</button>")
-        $("#flavor-text").html("<h1>Sorry... you LOSE. You were defeated by: <span class='winner-font'>" + this.enemySelectedValue.toUpperCase() + "</span>.");
-        $("#" + this.enemySelectedValue).removeClass("defender-character-image").addClass("huge-img");
+        $("#flavor-text").html("<h1>Sorry... you LOSE. <p>You were defeated by: <span class='winner-font'>" + this.enemySelectedValue.toUpperCase() + "</span>.</p></h1>");
+        $("#" + this.enemySelectedValue).removeClass().addClass("huge-img order-first");
         this.resetFunction();
         return;
     },
@@ -512,7 +527,7 @@ var dbzObject = {
         // $("#defender").html("<p></p>");
         // $("#attack").hide();
         $("#resetDiv").html("<button type='button' class='btn btn-danger' id='reset'>Reset</button>")
-        $("#flavor-text").html("<h1>YOU WIN! <span class='winner-font'>" + this.characterSelectedValue.toUpperCase() + "</span> IS THE GREATEST FIGHTER IN THE UNIVERSE");
+        $("#flavor-text").html("<h1>YOU WIN! <span class='winner-font'>" + this.characterSelectedValue.toUpperCase() + "</span> IS THE GREATEST FIGHTER IN THE UNIVERSE</h1>");
         $("#" + this.characterSelectedValue).removeClass("player-character-image").addClass("huge-img");
         this.resetFunction();
         return;
@@ -528,7 +543,9 @@ var dbzObject = {
         $("#reset").off().on("click", function () {
             $("#" + dbzObject.characterSelectedValue + "-div").empty();
             $("#resetDiv, #flavor-text, #your-character, #available-enemies, #defender").empty();
-            $("#flavor-text").html("<p>Click a character to choose your fighter!</p>").addClass("col-3");
+            $("#flavor-text").removeClass().html("<p>Click a character to choose your fighter!</p>").addClass("col-3");
+
+            $("#available-enemies").html("<p>Enemies Available To Attack</p>");
             $("#available-enemies, #defender, #attack, #your-character").show();
             dbzObject.characterSelected = false;
             dbzObject.characterSelectedValue = "";
