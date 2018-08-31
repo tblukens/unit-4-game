@@ -204,11 +204,11 @@ var dbzObject = {
     // also move enemies available to "#available-enemies"
     enemySelect: function () {
         if (this.characterSelected === true && this.enemySelected === false && this.hasDefeated === false) {
-            $("#yourCharacterP, #available-enemies").show();
+            $("#yourCharacterP, #available-enemies, #attack").show();
             $("#flavor-text").text("Great choice! Now choose who to fight from the available enemies!")
         }
 
-        if (this.enemySelected === false) {
+        if (this.enemySelected === false && this.gameOver === false) {
             $(".character-image").off();
             $(".character-image").on("click", function () {
                 if ($(this).attr("value") === "Goku") {
@@ -255,7 +255,7 @@ var dbzObject = {
     // show damage in #flavor-text
     battleFunction: function () {
         if (this.characterSelected === true && this.enemySelected === true && this.hasAttacked === false) {
-            $("#defenderP, #attack").show();
+            $("#defenderP, #attackDiv").show();
             $("#flavor-text").text("Oh, he's a tough one. Click ATTACK button to fight until someone loses!")
         }
 
@@ -287,8 +287,12 @@ var dbzObject = {
             // $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.name + " " + defenderCharacter.healthPoints);
             $("#" + dbzObject.enemySelectedValue + "-info").html("ATK: " + defenderCharacter.attackPower + " | <span class='charName'>" + defenderCharacter.name + "</span> | " + " " + "HP: " + defenderCharacter.healthPoints);
 
-            if (defenderCharacter.healthPoints <= 0) {
+
+            if (defenderCharacter.healthPoints <= 0 && playerCharacter.healthPoints > 0) {
                 dbzObject.enemyDefeated();
+            }
+            if (playerCharacter.healthPoints <= 0) {
+                dbzObject.youLose();
             }
         };
         var gokuSelect = this.characterListArray[0];
@@ -300,42 +304,44 @@ var dbzObject = {
         $(".character-image").off();
         $("#attack").off();
         $("#attack").on("click", function () {
+            $("#attackDiv").hide();
+            $("#defender, #your-character").stop();
             if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Krillin") {
                 theRealBattleFunction(gokuSelect, krillinSelect);
                 dbzObject.battleAnimations(gokuSelect, krillinSelect);
             } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Piccolo") {
                 theRealBattleFunction(gokuSelect, piccoloSelect);
-                theRealBattleFunction(gokuSelect, piccoloSelect);
+                dbzObject.battleAnimations(gokuSelect, piccoloSelect);
             } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(gokuSelect, vegetaSelect);
-                theRealBattleFunction(gokuSelect, vegetaSelect);
+                dbzObject.battleAnimations(gokuSelect, vegetaSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(krillinSelect, gokuSelect);
-                theRealBattleFunction(krillinSelect, gokuSelect);
+                dbzObject.battleAnimations(krillinSelect, gokuSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Piccolo") {
                 theRealBattleFunction(krillinSelect, piccoloSelect);
-                theRealBattleFunction(krillinSelect, piccoloSelect);
+                dbzObject.battleAnimations(krillinSelect, piccoloSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(krillinSelect, vegetaSelect);
-                theRealBattleFunction(krillinSelect, vegetaSelect);
+                dbzObject.battleAnimations(krillinSelect, vegetaSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(piccoloSelect, gokuSelect);
-                theRealBattleFunction(piccoloSelect, gokuSelect);
+                dbzObject.battleAnimations(piccoloSelect, gokuSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Krillin") {
                 theRealBattleFunction(piccoloSelect, krillinSelect);
-                theRealBattleFunction(piccoloSelect, krillinSelect);
+                dbzObject.battleAnimations(piccoloSelect, krillinSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(piccoloSelect, vegetaSelect);
-                theRealBattleFunction(piccoloSelect, vegetaSelect);
+                dbzObject.battleAnimations(piccoloSelect, vegetaSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(vegetaSelect, gokuSelect);
-                theRealBattleFunction(vegetaSelect, gokuSelect);
+                dbzObject.battleAnimations(vegetaSelect, gokuSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Krillin") {
                 theRealBattleFunction(vegetaSelect, krillinSelect);
-                theRealBattleFunction(vegetaSelect, krillinSelect);
+                dbzObject.battleAnimations(vegetaSelect, krillinSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Piccolo") {
                 theRealBattleFunction(vegetaSelect, piccoloSelect);
-                theRealBattleFunction(vegetaSelect, piccoloSelect);
+                dbzObject.battleAnimations(vegetaSelect, piccoloSelect);
             }
         });
         return;
@@ -382,7 +388,9 @@ var dbzObject = {
             }, 50, 'linear').animate({
                 left: '0px'
             }, 50, 'linear');
-        } else if (defenderCharacter.healthPoints <= 0) {
+
+            $("#attackDiv").delay(1700).show(0);
+        } else if (defenderCharacter.healthPoints <= 0 && playerCharacter.healthPoints > 0) {
             playerAnimate.animate({
                 left: '100px'
             }, 50, 'linear').animate({
@@ -485,7 +493,17 @@ var dbzObject = {
         return;
     },
     youLose: function () {
-
+        this.gameOver = true;
+        this.enemySelected = true;
+        $("#available-enemies, #attack, #your-character").hide();
+        $("#flavor-text").removeClass("col-3");
+        // $("#defender").html("<p></p>");
+        // $("#attack").hide();
+        $("#resetDiv").html("<button type='button' class='btn btn-danger' id='reset'>Reset</button>")
+        $("#flavor-text").html("<h1>Sorry... you LOSE. You were defeated by: <span class='winner-font'>" + this.enemySelectedValue.toUpperCase() + "</span>.");
+        $("#" + this.enemySelectedValue).removeClass("defender-character-image").addClass("huge-img");
+        this.resetFunction();
+        return;
     },
     youWin: function () {
         this.gameOver = true;
@@ -511,7 +529,7 @@ var dbzObject = {
             $("#" + dbzObject.characterSelectedValue + "-div").empty();
             $("#resetDiv, #flavor-text, #your-character, #available-enemies, #defender").empty();
             $("#flavor-text").html("<p>Click a character to choose your fighter!</p>").addClass("col-3");
-            $("#available-enemies, #defender, #attack").show();
+            $("#available-enemies, #defender, #attack, #your-character").show();
             dbzObject.characterSelected = false;
             dbzObject.characterSelectedValue = "";
             dbzObject.enemySelected = false;
