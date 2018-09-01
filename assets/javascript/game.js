@@ -63,7 +63,7 @@ var dbzObject = {
             const element = this.characterListArray[i].name;
             console.log(element);
             var newCharacterDiv = $("<div>");
-            newCharacterDiv.addClass("thumbnail d-inline text-center");
+            newCharacterDiv.addClass("thumbnail d-inline text-center mx-1");
             newCharacterDiv.attr({
                 id: this.characterListArray[i].name + "-div",
                 value: this.characterListArray[i].name
@@ -218,7 +218,7 @@ var dbzObject = {
                     dbzObject.enemySelectedValue = "Goku";
                     $(this).removeClass("character-image enemies-available");
                     if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image");
+                        $(this).addClass("defender-character-image flipped");
                     }
                 } else if ($(this).attr("value") === "Krillin") {
                     $("#Krillin-div").detach().appendTo("#defender");
@@ -227,7 +227,7 @@ var dbzObject = {
                     dbzObject.enemySelectedValue = "Krillin";
                     $(this).removeClass("character-image enemies-available");
                     if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image");
+                        $(this).addClass("defender-character-image flipped");
                     }
                 } else if ($(this).attr("value") === "Piccolo") {
                     $("#Piccolo-div").detach().appendTo("#defender");
@@ -236,7 +236,7 @@ var dbzObject = {
                     dbzObject.enemySelectedValue = "Piccolo";
                     $(this).removeClass("character-image enemies-available");
                     if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image");
+                        $(this).addClass("defender-character-image flipped");
                     }
                 } else if ($(this).attr("value") === "Vegeta") {
                     $("#Vegeta-div").detach().appendTo("#defender");
@@ -245,7 +245,7 @@ var dbzObject = {
                     dbzObject.enemySelectedValue = "Vegeta";
                     $(this).removeClass("character-image enemies-available");
                     if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image");
+                        $(this).addClass("defender-character-image flipped");
                     }
 
                 }
@@ -264,7 +264,7 @@ var dbzObject = {
     // show damage in #flavor-text
     battleFunction: function () {
         if (this.characterSelected === true && this.enemySelected === true && this.hasAttacked === false) {
-            $("#defenderP, #attackDiv").show();
+            $("#defenderP, #attack").show();
             $("#flavor-text").text("Oh, he's a tough one. Click ATTACK button to fight until someone loses!")
         }
 
@@ -316,7 +316,7 @@ var dbzObject = {
         $(".character-image").off();
         $("#attack").off();
         $("#attack").on("click", function () {
-            $("#attackDiv").hide();
+            $("#attack").hide();
             $("#defender, #your-character").stop();
             if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Krillin") {
                 theRealBattleFunction(gokuSelect, krillinSelect);
@@ -365,6 +365,9 @@ var dbzObject = {
         var playerAnimate = $("#your-character");
 
         if (playerCharacter.healthPoints > 0 && defenderCharacter.healthPoints > 0) {
+
+            $(".player-character-image").attr("src", "./assets/images/" + this.characterSelectedValue.toLowerCase() + "Attack.png");
+            $(".defender-character-image").attr("src", "./assets/images/" + this.enemySelectedValue.toLowerCase() + "Attack.png");
             playerAnimate.animate({
                 left: '50px'
             }, 100, 'linear').animate({
@@ -405,7 +408,15 @@ var dbzObject = {
                 left: '0px'
             }, 50, 'linear');
 
-            $("#attackDiv").delay(1700).show(0);
+            $("#attack").delay(1700).show(0);
+
+            function changePlayerImage() {
+                $(".player-character-image").attr("src", "./assets/images/" + dbzObject.characterSelectedValue.toLowerCase() + ".png");
+
+                $(".defender-character-image").attr("src", "./assets/images/" + dbzObject.enemySelectedValue.toLowerCase() + ".png");
+            }
+            setTimeout(changePlayerImage, 1700);
+
         } else if (defenderCharacter.healthPoints <= 0 && playerCharacter.healthPoints > 0) {
             playerAnimate.animate({
                 left: '100px'
