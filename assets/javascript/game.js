@@ -48,52 +48,19 @@ var dbzObject = {
 
 
     ],
-    attackAudio: [{
-        name: 1,
-        src: "./assets/audio/burning_fire.wav"
-    },
-    {
-        name: 2,
-        src: "./assets/audio/groundhit2.wav"
-    },
-    {
-        name: 3,
-        src: "./assets/audio/groundhit3.wav"
-    },
-    {
-        name: 4,
-        src: "./assets/audio/hard_punch.wav"
-    },
-    {
-        name: 5,
-        src: "./assets/audio/mediumkick.wav"
-    },
-    {
-        name: 6,
-        src: "./assets/audio/mediumpunch.wav"
-    },
-    {
-        name: 7,
-        src: "./assets/audio/meleemisses.wav"
-    },
-    {
-        name: 8,
-        src: "./assets/audio/prepunch1.wav"
-    },
-    {
-        name: 9,
-        src: "./assets/audio/punch.wav"
-    },
-    {
-        name: 10,
-        src: "./assets/audio/repeating_punches.wav"
-    },
-    {
-        name: "defeated",
-        src: "./assets/audio/deathfall.wav"
-    }
-
+    attackAudio: [
+        "assets/audio/burning_fire.mp3",
+        "assets/audio/groundhit2.mp3",
+        "assets/audio/groundhit3.mp3",
+        "assets/audio/hard_punch.mp3",
+        "assets/audio/mediumkick.mp3",
+        "assets/audio/mediumpunch.mp3",
+        // "assets/audio/meleemisses.mp3",
+        "assets/audio/prepunch1.mp3",
+        "assets/audio/punch.mp3"
     ],
+
+    defeatSound: new Audio('assets/audio/deathfall.mp3'),
     // gokuSelect: this.characterListArray[0],
     // krillinSelect: this.characterListArray[1],
     // piccoloSelect: this.characterListArray[2],
@@ -105,7 +72,7 @@ var dbzObject = {
         $("#attack, #yourCharacterP, #defenderP, #available-enemies").hide();
         for (let i = 0; i < this.characterListArray.length; i++) {
             const element = this.characterListArray[i].name;
-            console.log(element);
+            // console.log(element);
             var newCharacterDiv = $("<div>");
             newCharacterDiv.addClass("thumbnail d-inline text-center mx-1");
             newCharacterDiv.attr({
@@ -236,7 +203,7 @@ var dbzObject = {
 
 
 
-                console.log(dbzObject.characterSelected);
+                // console.log(dbzObject.characterSelected);
                 return;
             });
         } // else if (this.characterSelected === true) {
@@ -328,10 +295,10 @@ var dbzObject = {
                 playerCharacter.attackPower = playerCharacter.attackPower + playerCharacter.constAttackPower;
                 defenderCharacter.healthPoints = defenderCharacter.healthPoints - playerCharacter.attackPower;
             }
-            console.log(playerCharacter.name + " " + playerCharacter.attackPower + " " + playerCharacter.healthPoints);
-            console.log(defenderCharacter.name + " " + defenderCharacter.attackPower + " " + defenderCharacter.healthPoints);
-            console.log(dbzObject.hasAttacked);
-            console.log(dbzObject.hasDefeated);
+            // console.log(playerCharacter.name + " " + playerCharacter.attackPower + " " + playerCharacter.healthPoints);
+            // console.log(defenderCharacter.name + " " + defenderCharacter.attackPower + " " + defenderCharacter.healthPoints);
+            // console.log(dbzObject.hasAttacked);
+            // console.log(dbzObject.hasDefeated);
 
 
 
@@ -409,6 +376,18 @@ var dbzObject = {
 
         var enemyAnimate = $("#defender");
         var playerAnimate = $("#your-character");
+        var selectedAudio = Math.floor((Math.random() * 8));
+        var counterAudio = Math.floor((Math.random() * 8));
+        // console.log(selectedAudio);
+        // console.log("#audio" + selectedAudio)
+        var audioSrc = $("#audio" + selectedAudio)[0];
+        var audioSrc2 = $("#audio" + counterAudio)[0];
+        // audioSrc.setSrc = dbzObject.attackAudio[selectedAudio];
+        // console.log(audioSrc);
+        // audioSrc.load();
+
+
+
 
         if (playerCharacter.healthPoints > 0 && defenderCharacter.healthPoints > 0) {
 
@@ -433,6 +412,13 @@ var dbzObject = {
             }, 50, 'linear').animate({
                 left: '0px'
             }, 50, 'linear');
+
+            audioSrc.play();
+
+            setTimeout(function () {
+                audioSrc2.play();
+            }, 1100);
+            // audioSrc2.delay(550).play();
 
             enemyAnimate.delay(550).animate({
                 left: '-=150px'
@@ -498,13 +484,16 @@ var dbzObject = {
             }, 50, 'linear').animate({
                 left: '-=50px'
             }, 50, 'linear').fadeOut(600);
+
+            this.defeatSound.play();
+
             function changePlayerImage() {
                 $(".player-character-image").attr("src", "./assets/images/" + dbzObject.characterSelectedValue.toLowerCase() + ".png");
             }
             setTimeout(changePlayerImage, 1500);
 
-            console.log(defenderCharacter.name);
-            console.log("#" + defenderCharacter.name + "-info");
+            // console.log(defenderCharacter.name);
+            // console.log("#" + defenderCharacter.name + "-info");
         }
 
         return;
@@ -514,7 +503,7 @@ var dbzObject = {
     // if defender wins - game over
     // else continue with next enemy
     availableShow: function () {
-        
+
     },
 
     enemyDefeated: function () {
@@ -547,40 +536,40 @@ var dbzObject = {
             dbzObject.enemySelect();
         };
         if (this.characterSelectedValue === "Goku" && this.enemySelectedValue === "Krillin") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(gokuSelect, krillinSelect);
         } else if (this.characterSelectedValue === "Goku" && this.enemySelectedValue === "Piccolo") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(gokuSelect, piccoloSelect);
         } else if (this.characterSelectedValue === "Goku" && this.enemySelectedValue === "Vegeta") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(gokuSelect, vegetaSelect);
         } else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Goku") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(krillinSelect, gokuSelect);
         } else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Piccolo") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(krillinSelect, piccoloSelect);
         } else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Vegeta") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(krillinSelect, vegetaSelect);
         } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Goku") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(piccoloSelect, gokuSelect);
         } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Krillin") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(piccoloSelect, krillinSelect);
         } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Vegeta") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(piccoloSelect, vegetaSelect);
         } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Goku") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(vegetaSelect, gokuSelect);
         } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Krillin") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(vegetaSelect, krillinSelect);
         } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Piccolo") {
-            console.log(this.characterSelectedValue, this.enemySelectedValue);
+            // console.log(this.characterSelectedValue, this.enemySelectedValue);
             enemyDefeatedFunction(vegetaSelect, piccoloSelect);
         }
         if (gokuSelect.healthPoints > 0 && krillinSelect.healthPoints <= 0 && piccoloSelect.healthPoints <= 0 && vegetaSelect.healthPoints <= 0) {
@@ -659,7 +648,7 @@ var dbzObject = {
             piccoloSelect.attackPower = piccoloSelect.constAttackPower;
             vegetaSelect.attackPower = vegetaSelect.constAttackPower;
 
-            console.log(dbzObject.characterListArray[0].attackPower, dbzObject.characterListArray[1].attackPower, dbzObject.characterListArray[2].attackPower, dbzObject.characterListArray[3].attackPower)
+            // console.log(dbzObject.characterListArray[0].attackPower, dbzObject.characterListArray[1].attackPower, dbzObject.characterListArray[2].attackPower, dbzObject.characterListArray[3].attackPower)
             dbzObject.displayCharacterSelect();
             if (dbzObject.characterSelected === false) {
                 dbzObject.playerSelectedCharacter();
@@ -682,6 +671,17 @@ var dbzObject = {
 $(document).ready(function () {
 
 
+    function loadAudioToPage() {
+        for (let i = 0; i < dbzObject.attackAudio.length; i++) {
+            const element = dbzObject.attackAudio[i];
+            // console.log(element);
+            var newAudio = $("<audio>");
+            newAudio.attr({ src: element, id: "audio" + [i] });
+            $("#audioContainer").append(newAudio);
+
+        }
+    }
+    loadAudioToPage();
 
     dbzObject.displayCharacterSelect();
     if (dbzObject.characterSelected === false) {
