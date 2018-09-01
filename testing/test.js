@@ -26,35 +26,35 @@ var defenderCharacter3HTML;
 
 var characters = [{
     name: 'Goku',
-    healthPoints: 1500,
-    resetHP: 1500,
-    attackPower: 135,
-    constAttackPower: 135,
-    counterAttack: 170,
+    healthPoints: 14475,
+    resetHP: 14475,
+    attackPower: 1310,
+    constAttackPower: 1310,
+    counterAttack: 1800,
 },
 {
     name: 'Krillin',
-    healthPoints: 1625,
-    resetHP: 1625,
-    attackPower: 115,
-    constAttackPower: 115,
-    counterAttack: 130,
+    healthPoints: 16000,
+    resetHP: 16000,
+    attackPower: 1150,
+    constAttackPower: 1150,
+    counterAttack: 1310,
 },
 {
     name: 'Piccolo',
-    healthPoints: 1500,
-    resetHP: 1500,
-    attackPower: 120,
-    constAttackPower: 120,
-    counterAttack: 160,
+    healthPoints: 15200,
+    resetHP: 15200,
+    attackPower: 1300,
+    constAttackPower: 1300,
+    counterAttack: 1660,
 },
 {
     name: 'Vegeta',
-    healthPoints: 1225,
-    resetHP: 1225,
-    attackPower: 175,
-    constAttackPower: 175,
-    counterAttack: 195,
+    healthPoints: 12950,
+    resetHP: 12950,
+    attackPower: 1750,
+    constAttackPower: 1750,
+    counterAttack: 1805,
 },
 
 
@@ -85,42 +85,44 @@ $(function () {
     $("#setVariables").on("click", function () {
 
         //health points
-        goku.healthPoints = $("#gokuHealth").val();
-        krillin.healthPoints = $("#krillinHealth").val();
-        piccolo.healthPoints = $("#piccoloHealth").val();
-        vegeta.healthPoints = $("#vegetaHealth").val();
-        goku.healthPoints = parseInt(goku.healthPoints);
-        krillin.healthPoints = parseInt(krillin.healthPoints);
-        piccolo.healthPoints = parseInt(piccolo.healthPoints);
-        vegeta.healthPoints = parseInt(vegeta.healthPoints);
+        goku.resetHP = goku.healthPoints = parseInt($("#gokuHealth").val());
+        krillin.resetHP = krillin.healthPoints = parseInt($("#krillinHealth").val());
+        piccolo.resetHP = piccolo.healthPoints = parseInt($("#piccoloHealth").val());
+        vegeta.resetHP = vegeta.healthPoints = parseInt($("#vegetaHealth").val());
 
         //attack power
-        goku.attackPower = $("#gokuAttack").val();
-        goku.attackPower = parseInt(goku.attackPower);
+        goku.constAttackPower = goku.attackPower = parseInt($("#gokuAttack").val());
 
-        krillin.attackPower = $("#krillinAttack").val();
-        krillin.attackPower = parseInt(krillin.attackPower);
+        krillin.constAttackPower = krillin.attackPower = parseInt($("#krillinAttack").val());
 
-        piccolo.attackPower = $("#piccoloAttack").val();
-        piccolo.attackPower = parseInt(piccolo.attackPower);
+        piccolo.constAttackPower = piccolo.attackPower = parseInt($("#piccoloAttack").val());
 
-        vegeta.attackPower = $("#vegetaAttack").val();
-        vegeta.attackPower = parseInt(vegeta.attackPower);
+        vegeta.constAttackPower = vegeta.attackPower = parseInt($("#vegetaAttack").val());
 
         //counter attack
-        goku.counterAttack = $("#gokuCounter").val();
-        goku.counterAttack = parseInt(goku.counterAttack);
+        goku.counterAttack = parseInt($("#gokuCounter").val());
 
-        krillin.counterAttack = $("#krillinCounter").val();
-        krillin.counterAttack = parseInt(krillin.counterAttack);
+        krillin.counterAttack = parseInt($("#krillinCounter").val());
 
-        piccolo.counterAttack = $("#piccoloCounter").val();
-        piccolo.counterAttack = parseInt(piccolo.counterAttack);
+        piccolo.counterAttack = parseInt($("#piccoloCounter").val());
 
-        vegeta.counterAttack = $("#vegetaCounter").val();
-        vegeta.counterAttack = parseInt(vegeta.counterAttack);
+        vegeta.counterAttack = parseInt($("#vegetaCounter").val());
 
+        $("#gokuHealth").attr("placeholder", goku.healthPoints);
+        $("#gokuAttack").attr("placeholder", goku.attackPower);
+        $("#gokuCounter").attr("placeholder", goku.counterAttack);
 
+        $("#krillinHealth").attr("placeholder", krillin.healthPoints);
+        $("#krillinAttack").attr("placeholder", krillin.attackPower);
+        $("#krillinCounter").attr("placeholder", krillin.counterAttack);
+
+        $("#piccoloHealth").attr("placeholder", piccolo.healthPoints);
+        $("#piccoloAttack").attr("placeholder", piccolo.attackPower);
+        $("#piccoloCounter").attr("placeholder", piccolo.counterAttack);
+
+        $("#vegetaHealth").attr("placeholder", vegeta.healthPoints);
+        $("#vegetaAttack").attr("placeholder", vegeta.attackPower);
+        $("#vegetaCounter").attr("placeholder", vegeta.counterAttack);
 
     });
 
@@ -131,9 +133,6 @@ $(function () {
         // $("#main-container").append(newRow);
 
         playerHTML = playerCharacter.name;
-        defenderCharacter1HTML = defenderCharacter1.name+" | HP: "+defenderCharacter1.healthPoints;
-        defenderCharacter2HTML = defenderCharacter2.name+" | HP: "+defenderCharacter2.healthPoints;
-        defenderCharacter3HTML = defenderCharacter3.name+" | HP: "+defenderCharacter3.healthPoints;
         do {
             playerCharacter.healthPoints = playerCharacter.healthPoints - defenderCharacter1.counterAttack;
             if (hasAttacked === true) {
@@ -147,7 +146,7 @@ $(function () {
                 defenderCharacter1.healthPoints = defenderCharacter1.healthPoints - playerCharacter.attackPower;
             }
             console.log(defenderCharacter1.name + ": " + defenderCharacter1.healthPoints);
-            console.log(playerCharacter.healthPoints);
+            console.log(playerCharacter.attackPower + ": AP");
             if (playerCharacter.healthPoints <= 0) {
                 playerHealthHTML = playerCharacter.healthPoints;
                 console.log("player died");
@@ -156,6 +155,7 @@ $(function () {
                 reset();
                 break;
             }
+            defenderCharacter1HTML = defenderCharacter1.name + " | HP: " + defenderCharacter1.healthPoints;
         } while (defenderCharacter1.healthPoints > 0 && playerCharacter.healthPoints > 0);
         if (defenderCharacter1.healthPoints <= 0) {
 
@@ -172,7 +172,7 @@ $(function () {
                     defenderCharacter2.healthPoints = defenderCharacter2.healthPoints - playerCharacter.attackPower;
                 }
                 console.log(defenderCharacter2.name + ": " + defenderCharacter2.healthPoints)
-                console.log(playerCharacter.attackPower);
+                console.log(playerCharacter.attackPower + ": AP");
                 if (playerCharacter.healthPoints <= 0) {
                     playerHealthHTML = playerCharacter.healthPoints;
                     console.log("player died");
@@ -181,6 +181,7 @@ $(function () {
                     reset();
                     break;
                 }
+                defenderCharacter2HTML = defenderCharacter2.name + " | HP: " + defenderCharacter2.healthPoints;
             } while (defenderCharacter2.healthPoints > 0 && playerCharacter.healthPoints > 0);
         }
         if (defenderCharacter2.healthPoints <= 0) {
@@ -197,7 +198,7 @@ $(function () {
                     defenderCharacter3.healthPoints = defenderCharacter3.healthPoints - playerCharacter.attackPower;
                 }
                 console.log(defenderCharacter3.name + ": " + defenderCharacter3.healthPoints)
-                console.log(playerCharacter.attackPower + " ");
+                console.log(playerCharacter.attackPower + ": AP");
                 if (playerCharacter.healthPoints <= 0) {
                     playerHealthHTML = playerCharacter.healthPoints;
                     console.log("player died");
@@ -206,6 +207,7 @@ $(function () {
                     reset();
                     break;
                 }
+                defenderCharacter3HTML = defenderCharacter3.name + " | HP: " + defenderCharacter3.healthPoints;
             } while (defenderCharacter3.healthPoints > 0 && playerCharacter.healthPoints > 0);
             if (defenderCharacter1.healthPoints <= 0 && defenderCharacter2.healthPoints <= 0 && defenderCharacter3.healthPoints <= 0 && playerCharacter.healthPoints > 0) {
 
@@ -223,22 +225,24 @@ $(function () {
 
     var htmlInput = function () {
         var attachTo = $("#" + playerHTML);
-        newCol = $("<div class='col border border-info m-2'>");
+        newCol = $("<div class='col border border-dark mr-1'>");
         if (hasWon) {
             newCol.html(
-                "<p>Player: " + playerHTML + " | Player HP:" + playerHealthHTML + "</p>" +
+                "<p class='player'>" + playerHTML + " | Player HP:" + playerHealthHTML + "</p>" +
                 "<p>D1: " + defenderCharacter1HTML + "</p>" +
                 "<p>D2: " + defenderCharacter2HTML + "</p>" +
                 "<p>D3: " + defenderCharacter3HTML + "</p>" +
                 "<p class='won'>" + hasWonText + "</p>");
+            newCol.addClass("won");
             $(attachTo).append(newCol);
         } else if (hasLost) {
             newCol.html(
-                "<p>Player: " + playerHTML + " | Player HP:" + playerHealthHTML + "</p>" +
+                "<p>" + playerHTML + " | Player HP:" + playerHealthHTML + "</p>" +
                 "<p>D1: " + defenderCharacter1HTML + "</p>" +
                 "<p>D2: " + defenderCharacter2HTML + "</p>" +
                 "<p>D3: " + defenderCharacter3HTML + "</p>" +
                 "<p class='lost'>" + hasLostText + "</p>");
+            newCol.addClass("lost");
             $(attachTo).append(newCol);
         }
     }
@@ -286,7 +290,7 @@ $(function () {
         $("#runDiv").hide();
         $("#reset").show();
     });
-    $("#reset").on("click", function (){
+    $("#reset").on("click", function () {
         $("#reset").hide();
         $("#runDiv").show();
         $("#Goku, #Krillin, #Piccolo, #Vegeta").empty();

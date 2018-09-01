@@ -16,7 +16,11 @@
             background: lightgreen;
         }
         .lost {
-            background: red;
+            background: firebrick;
+            color: white;
+        }
+        .player {
+            font-weight: bold;
         }
         </style>
 </head>
@@ -25,7 +29,7 @@
 
 
     <div class="container-fluid text-center" id="main-container">
-        <!-- <div class="row">
+        <div class="row">
             <div class="col">
                 <h1>Goku</h1>
             </div>
@@ -34,16 +38,16 @@
 
             <div class="form-group col">
                 <label for="gokuHealth">Goku Health</label>
-                <input type="number" class="form-control" name="gokuHealth" id="gokuHealth" aria-describedby="gokuHealthID" placeholder="Goku Health">
+                <input type="number" class="form-control" name="gokuHealth" id="gokuHealth" aria-describedby="gokuHealthID" placeholder="15000">
             </div>
             <div class="form-group col">
                 <label for="gokuAttack">Goku Attack</label>
-                <input type="number" class="form-control" name="gokuAttack" id="gokuAttack" aria-describedby="gokuAttackID" placeholder="Goku Attack">
+                <input type="number" class="form-control" name="gokuAttack" id="gokuAttack" aria-describedby="gokuAttackID" placeholder="1350">
             </div>
 
             <div class="form-group col">
                 <label for="gokuCounter">Goku Counter</label>
-                <input type="number" class="form-control" name="gokuCounter" id="gokuCounter" aria-describedby="gokuCounterID" placeholder="Goku Counter">
+                <input type="number" class="form-control" name="gokuCounter" id="gokuCounter" aria-describedby="gokuCounterID" placeholder="1700">
             </div>
         </div>
 
@@ -55,15 +59,15 @@
         <div class="row">
             <div class="form-group col">
                 <label for="krillinHealth">Krillin Health</label>
-                <input type="number" class="form-control" name="krillinHealth" id="krillinHealth" aria-describedby="krillinHealth" placeholder="Krillin Health">
+                <input type="number" class="form-control" name="krillinHealth" id="krillinHealth" aria-describedby="krillinHealth" placeholder="16250">
             </div>
             <div class="form-group col">
                 <label for="krillinAttack">Krillin Attack</label>
-                <input type="number" class="form-control" name="krillinAttack" id="krillinAttack" aria-describedby="krillinAttack" placeholder="Krillin Attack">
+                <input type="number" class="form-control" name="krillinAttack" id="krillinAttack" aria-describedby="krillinAttack" placeholder="1150">
             </div>
             <div class="form-group col">
                 <label for="krillinCounter">Krillin Counter</label>
-                <input type="number" class="form-control" name="krillinCounter" id="krillinCounter" aria-describedby="krillinCounter" placeholder="Krillin Counter">
+                <input type="number" class="form-control" name="krillinCounter" id="krillinCounter" aria-describedby="krillinCounter" placeholder="1300">
             </div>
         </div>
 
@@ -75,16 +79,16 @@
         <div class="row">
             <div class="form-group col">
                 <label for="piccoloHealth">Piccolo Health</label>
-                <input type="number" class="form-control" name="piccoloHealth" id="piccoloHealth" aria-describedby="piccoloHealth" placeholder="Piccolo Health">
+                <input type="number" class="form-control" name="piccoloHealth" id="piccoloHealth" aria-describedby="piccoloHealth" placeholder="15000">
             </div>
             <div class="form-group col">
                 <label for="piccoloAttack">Piccolo Attack</label>
-                <input type="number" class="form-control" name="piccoloAttack" id="piccoloAttack" aria-describedby="piccoloAttack" placeholder="Piccolo Attack">
+                <input type="number" class="form-control" name="piccoloAttack" id="piccoloAttack" aria-describedby="piccoloAttack" placeholder="1200">
             </div>
 
             <div class="form-group col">
                 <label for="piccoloCounter">Piccolo Counter</label>
-                <input type="number" class="form-control" name="piccoloCounter" id="piccoloCounter" aria-describedby="piccoloCounter" placeholder="Piccolo Counter">
+                <input type="number" class="form-control" name="piccoloCounter" id="piccoloCounter" aria-describedby="piccoloCounter" placeholder="1600">
             </div>
         </div>
 
@@ -96,40 +100,40 @@
         <div class="row">
             <div class="form-group col">
                 <label for="vegetaHealth">Vegeta Health</label>
-                <input type="number" class="form-control" name="vegetaHealth" id="vegetaHealth" aria-describedby="vegetaHealth" placeholder="Vegeta Health">
+                <input type="number" class="form-control" name="vegetaHealth" id="vegetaHealth" aria-describedby="vegetaHealth" placeholder="12250">
             </div>
             <div class="form-group col">
                 <label for="vegetaAttack">Vegeta Attack</label>
-                <input type="number" class="form-control" name="vegetaAttack" id="vegetaAttack" aria-describedby="vegetaAttack" placeholder="Vegeta Attack">
+                <input type="number" class="form-control" name="vegetaAttack" id="vegetaAttack" aria-describedby="vegetaAttack" placeholder="1750">
             </div>
             <div class="form-group col">
                 <label for="vegetaCounter">Vegeta Counter</label>
-                <input type="number" class="form-control" name="vegetaCounter" id="vegetaCounter" aria-describedby="vegetaCounter" placeholder="Vegeta Counter">
+                <input type="number" class="form-control" name="vegetaCounter" id="vegetaCounter" aria-describedby="vegetaCounter" placeholder="1950">
             </div>
-        </div> -->
+        </div>
 
 
         <div class="row text-center" id="buttons">
-            <!-- <div class="col text-center">
-                <input name="setVariables" id="setVariables" class="btn btn-primary btn-lg" type="button" value="Apply">
-            </div> -->
+            <div class="col text-center">
+                <input name="setVariables" id="setVariables" class="btn btn-warning btn-lg" type="button" value="Apply">
+            </div>
             <div class="col text-center" id="runDiv">
-                <input name="runFunction" id="runFunction" class="btn btn-primary btn-lg" type="button" value="Run Function">
+                <input name="runFunction" id="runFunction" class="btn btn-success btn-lg" type="button" value="Run Function">
             </div>
             <div class="col text-center" id="reset">
-                <input name="resetButton" id="resetButton" class="btn btn-primary btn-lg" type="button" value="Reset">
+                <input name="resetButton" id="resetButton" class="btn btn-danger btn-lg" type="button" value="Reset">
             </div>
         </div>
         <div class="container-fluid m-0 w100" id="characters">
-            <div class="row m-2 p-2" id="Goku">
+            <div class="row mb-1" id="Goku">
             </div>
-            <div class="row m-2 p-2" id="Krillin">
+            <div class="row mb-1" id="Krillin">
 
             </div>
-            <div class="row m-2 p-2" id="Piccolo">
+            <div class="row mb-1" id="Piccolo">
 
             </div>
-            <div class="row m-2 p-2" id="Vegeta">
+            <div class="row" id="Vegeta">
 
             </div>
         </div>

@@ -14,35 +14,35 @@ var dbzObject = {
     freshGame: true,
     characterListArray: [{
         name: 'Goku',
-        healthPoints: 14,
-        resetHP: 14,
-        attackPower: 12,
-        constAttackPower: 12,
-        counterAttack: 14,
+        healthPoints: 14475,
+        resetHP: 14475,
+        attackPower: 1310,
+        constAttackPower: 1310,
+        counterAttack: 1800,
     },
     {
         name: 'Krillin',
-        healthPoints: 115,
-        resetHP: 115,
-        attackPower: 444,
-        constAttackPower: 444,
-        counterAttack: 444,
+        healthPoints: 16000,
+        resetHP: 16000,
+        attackPower: 1150,
+        constAttackPower: 1150,
+        counterAttack: 1310,
     },
     {
         name: 'Piccolo',
-        healthPoints: 130,
-        resetHP: 130,
-        attackPower: 14,
-        constAttackPower: 14,
-        counterAttack: 16,
+        healthPoints: 15200,
+        resetHP: 15200,
+        attackPower: 1300,
+        constAttackPower: 1300,
+        counterAttack: 1660,
     },
     {
         name: 'Vegeta',
-        healthPoints: 120,
-        resetHP: 120,
-        attackPower: 16,
-        constAttackPower: 16,
-        counterAttack: 18,
+        healthPoints: 12950,
+        resetHP: 12950,
+        attackPower: 1750,
+        constAttackPower: 1750,
+        counterAttack: 1805,
     },
 
 
@@ -71,7 +71,7 @@ var dbzObject = {
             $("#character-select").append(newCharacterDiv)
             var newCharacterDivImg = $("<img>");
             newCharacterDivImg.attr("src", "./assets/images/" + this.characterListArray[i].name.toLowerCase() + ".png");
-            newCharacterDivImg.addClass("character-image border border-danger ");
+            newCharacterDivImg.addClass("img-fluid character-image border border-danger ");
             newCharacterDivImg.attr({
                 id: this.characterListArray[i].name,
                 value: this.characterListArray[i].name,
@@ -273,10 +273,13 @@ var dbzObject = {
             if (dbzObject.hasAttacked === true) {
                 playerCharacter.attackPower = playerCharacter.attackPower + playerCharacter.constAttackPower;
                 defenderCharacter.healthPoints = defenderCharacter.healthPoints - playerCharacter.attackPower;
-            } else if (dbzObject.hasAttacked === false) {
+            } else if (dbzObject.hasAttacked === false && dbzObject.hasDefeated === false) {
                 defenderCharacter.healthPoints = defenderCharacter.healthPoints - playerCharacter.attackPower;
                 dbzObject.hasAttacked = true;
             } else if (dbzObject.hasAttacked === false && dbzObject.hasDefeated === true) {
+                playerCharacter.attackPower = playerCharacter.attackPower + playerCharacter.constAttackPower;
+                defenderCharacter.healthPoints = defenderCharacter.healthPoints - playerCharacter.attackPower;
+            } else if (dbzObject.hasAttacked === true && dbzObject.hasDefeated === true) {
                 playerCharacter.attackPower = playerCharacter.attackPower + playerCharacter.constAttackPower;
                 defenderCharacter.healthPoints = defenderCharacter.healthPoints - playerCharacter.attackPower;
             }
