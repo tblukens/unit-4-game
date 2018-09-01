@@ -32,6 +32,8 @@ img {
 
 .thumbnail {
     position: relative;
+    /* height: 360px;
+    background: #72959e6c; */
 }
 
 .charName {
@@ -52,18 +54,21 @@ img.character-image {
     max-width: 270px;
     max-height: 360px;
     width: 100%;
+    height: 360px;
 }
 img.defender-character-image {
     max-width: 270px;
     max-height: 360px;
     width: 100%;
     background: #A02616;
+    height: 360px;
 }
 img.player-character-image {
     max-width: 270px;
     max-height: 360px;
     width: 100%;
     background: #229540;
+    height: 360px;
 }
 img.enemies-available {
     max-width: 270px;
