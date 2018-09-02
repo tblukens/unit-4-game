@@ -1,4 +1,18 @@
+@font-face {
+    font-family: SaiyanSans;
+    src: url('../font/Saiyan-Sans.ttf');
+}
+@font-face {
+    font-family: SaiyanSansLeft;
+    src: url('../font/Saiyan-Sans\ Left\ Oblique.ttf');
+}
+@font-face {
+    font-family: SaiyanSansRight;
+    src: url('../font/Saiyan-Sans\ Right\ Oblique.ttf')
+}
+
 html, body {
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
     background: #c77a2e;
     color: #fff;
     max-height: 100%;
@@ -9,14 +23,35 @@ html, body {
     margin: 0 auto;
 }
 
-header {
-    background: #C7402E;
+#char {
+    background: #A05B16;
+}
+#eata {
+    background: #773B00;
 }
 
-img {
-    max-height: 360px;
-    /* max-width: 280px; */
+header {
+    font-family: SaiyanSans;
+    background: #C7402E;
+    color: yellow;
+    text-shadow:
+    -3px -3px 0 #000,  
+     3px -3px 0 #000,
+     -3px 3px 0 #000,
+      3px 3px 0 #000;
 }
+#leftsans {
+    font-family: SaiyanSansLeft;
+}
+#rightsans {
+    font-family: SaiyanSansRight;
+    color: red;
+}
+
+/* img {
+    max-height: 360px; */
+    /* max-width: 280px;
+} */
 
 /* .jumbotron {
     max-height: 120px;
@@ -88,9 +123,19 @@ img.enemies-available {
 
 
 .huge-img {
-    max-width: 340px;
-    max-height: 400px;
+    /* max-width: 340px;
+    max-height: 400px; */
+    width: 420px;
+    height: 560px;
     background: #DE9955;
+}
+
+.huge-img-lost {
+    /* max-width: 340px;
+    max-height: 400px; */
+    width: 420px;
+    height: 560px;
+    background: rgba(255, 0, 0, 0.438);
 }
 
 .winner-font {

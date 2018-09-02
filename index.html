@@ -14,52 +14,52 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- <header class="jumbotron jumbotron-fluid bg-danger"> -->
-    <header class="">
-        <h1 class="display-3">Dragon Ball Z Fighter RPG</h1>
+    <header class="text-center border-bottom border-warning">
+        <h1 class="display-3"><span id="leftsans">Dragon</span><span id="rightsans"> Ball Z</span> Fighter RPG</h1>
     </header>
     <!-- </header> -->
 
-    <div id="wrapper" class="container-fluid mx-auto h100 w100 text-center p-0">
+    <div id="wrapper" class="container-fluid mx-auto h-auto w-auto text-center p-0">
 
+        <div class="row mt-1 align-self-end justify-content-center align-items-center align-text-bottom align-bottom">
+            <div class="col h-auto w-auto align-self-end ">
+                <p id="yourCharacterP" class="m-0">Your Character</p>
+            </div>
+            <div class="col-3 align-text-bottom m-0">
+                
+            </div>
+            <div class="col w-auto align-self-end ">
+                <p id="defenderP" class="m-0">Defender</p>
+            </div>
+        </div>
 
-        <div class="row align-self-center justify-content-center align-items-center text-center">
+        <div class="row mt-1 align-self-center justify-content-center align-items-center text-center">
             <div id="character-select" class="col">
 
             </div>
         </div>
-
-        <div class="row align-self-center justify-content-center align-items-center align-text-bottom">
-            <div class="col h100 w100">
-                <p id="yourCharacterP">Your Character</p>
-            </div>
-            <div class="col-3 align-text-bottom">
-                <br>
-            </div>
-            <div class="col w100">
-                <p id="defenderP">Defender</p>
-            </div>
-        </div>
         
-        <div class="row align-self-center justify-content-center align-items-center align-text-bottom">
-            <div id="your-character" class="col h100 w100">
+        <div id="char" class="row py-2 align-self-center justify-content-center align-items-center align-text-bottom border-bottom border-top border-danger rounded">
+            <div id="your-character" class="col h-auto w-auto">
                 <!-- <p id="yourCharacterP">Your Character</p> -->
             </div>
             <div id="flavor-text" class="col-3 align-text-bottom">
                 <p>Click a character to choose your fighter!</p>
             </div>
-            <div id="defender" class="col w100">
+            <div id="defender" class="col w-auto">
                 <!-- <p id="defenderP">Defender</p> -->
             </div>
         </div>
 
-        <div class="row align-self-center justify-content-center align-items-center">
+        <div id="attackRow" class="row align-self-center justify-content-center align-items-center">
             <div class="col-md-2"></div>
-            <div class="col-md-8" id="attackDiv">
+            <div class="col" id="attackDiv">
                 <button type="button" class="btn btn-danger" id="attack">Attack</button>
             </div>
             <div class="col-md-2"></div>
@@ -68,8 +68,8 @@
             <div id="resetDiv" class="col-md-8">
             </div>
         </div>
-        <div class="row align-self-center justify-content-center align-items-center">
-            <div id="available-enemies" class="col-md-8">
+        <div id="eata" class="row align-self-center justify-content-center align-items-center h-auto mt-1 pt-1 border-bottom border-top border-danger">
+            <div id="available-enemies" class="col-md-8 pb-2">
                 <p>Enemies Available To Attack</p>
             </div>
         </div>
