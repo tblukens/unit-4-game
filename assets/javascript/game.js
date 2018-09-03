@@ -214,7 +214,8 @@ var dbzObject = {
     enemySelect: function () {
         if (this.characterSelected === true && this.enemySelected === false && this.hasDefeated === false) {
             $("#yourCharacterP, #available-enemies, #eata, #attack").show();
-            $("#flavor-text").text("Great choice! Now choose who to fight from the available enemies!")
+            $("#flavor-text").text("Great choice! Now choose who to fight from the available enemies!");
+            $("#attackRow").detach().show().appendTo("#flavor-text");
         }
 
         if (this.enemySelected === false) {
@@ -261,6 +262,7 @@ var dbzObject = {
 
                 dbzObject.enemySelected = true;
                 dbzObject.battleFunction();
+                $("#char").addClass("arena-bg");
 
             });
         }
@@ -273,9 +275,11 @@ var dbzObject = {
     // show damage in #flavor-text
     battleFunction: function () {
         if (this.characterSelected === true && this.enemySelected === true && this.hasAttacked === false) {
+            $("#attackRow").detach().hide().appendTo("#wrapper");
             $("#defenderP, #attack").show();
             $("#eata").hide();
-            $("#flavor-text").html("Oh, he's a tough one. Click ATTACK button to fight until someone loses!");
+            $("#flavor-text").html("<p>Oh, he's a tough one.</p><p>Click ATTACK button to fight until someone loses!</p>");
+            $("#attackRow").detach().show().appendTo("#flavor-text");
             // $("#attackDiv").detach().appendTo("#char");
         }
 
@@ -298,15 +302,15 @@ var dbzObject = {
 
 
 
-
+            $("#attackRow").hide().detach().prependTo("#wrapper");
             $("#flavor-text").html("<p>" + dbzObject.characterSelectedValue + " dealt " + playerCharacter.attackPower + " damage to " + dbzObject.enemySelectedValue + "</p>" +
                 "<p>" + dbzObject.enemySelectedValue + " dealt " + defenderCharacter.counterAttack + " back to " + dbzObject.characterSelectedValue + "!"
-                );
+            );
             // $("#" + dbzObject.characterSelectedValue + "-info").text(playerCharacter.name + " " + playerCharacter.healthPoints);
             $("#" + dbzObject.characterSelectedValue + "-info").html("ATK: " + playerCharacter.attackPower + " | <span class='charName'>" + playerCharacter.name + "</span> | " + " " + "HP: " + playerCharacter.healthPoints);
             // $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.name + " " + defenderCharacter.healthPoints);
             $("#" + dbzObject.enemySelectedValue + "-info").html("ATK: " + defenderCharacter.attackPower + " | <span class='charName'>" + defenderCharacter.name + "</span> | " + " " + "HP: " + defenderCharacter.healthPoints);
-
+            $("#attackRow").detach().show().appendTo("#flavor-text");
 
             if (defenderCharacter.healthPoints <= 0 && playerCharacter.healthPoints > 0) {
                 dbzObject.lastEnemyDefeated = defenderCharacter.name;
@@ -506,16 +510,18 @@ var dbzObject = {
 
         var enemyDefeatedFunction = function (playerCharacter, defenderCharacter) {
 
-            
+
+            $("#attackRow").hide().detach().prependTo("#wrapper");
             $("#flavor-text").html("<p>You have defeated " + dbzObject.enemySelectedValue + "! Choose another enemy to continue!</p> <p>" +
                 dbzObject.characterSelectedValue + " dealt " + playerCharacter.attackPower + " damage to " + dbzObject.enemySelectedValue + "</p>" +
                 "<p>" + dbzObject.enemySelectedValue + " dealt " + defenderCharacter.counterAttack + " back to " + dbzObject.characterSelectedValue + "!");
             $("#" + dbzObject.characterSelectedValue + "-info").html("ATK: " + playerCharacter.attackPower + " | <span class='charName'>" + playerCharacter.name + "</span> | " + " " + "HP: " + playerCharacter.healthPoints);
             $("#" + dbzObject.enemySelectedValue + "-info").html("ATK: " + defenderCharacter.attackPower + " | <span class='charName'>" + defenderCharacter.name + "</span> | " + " " + "HP: " + defenderCharacter.healthPoints);
 
+            $("#attackRow").detach().show().prependTo("#flavor-text");
             dbzObject.enemySelectedValue = "";
             dbzObject.enemySelected = false;
-            $("#eata").delay(1200).fadeIn(500);
+            $("#eata").delay(800).fadeIn(400);
 
 
 
@@ -557,7 +563,7 @@ var dbzObject = {
         }
 
         // var attackButton = '<div class="col" id="attackDiv"><button type="button" class="btn btn-danger" id="attack">Attack</button></div>';
-        
+
         return;
     },
 
@@ -567,14 +573,15 @@ var dbzObject = {
         this.gameOver = true;
         this.enemySelected = true;
 
+        $("#attackRow").detach().hide().prependTo("#wrapper");
         $("#available-enemies, #attack, #your-character, #defenderP, #yourCharacterP").hide();
-        $("#flavor-text").detach().prependTo("#eata").removeClass("col-3").addClass("order-last");
+        $("#flavor-text").detach().prependTo("#eata").removeClass("col-3");
         // $("#defender").html("<p></p>");
-    $("#eata").fadeIn(400);
+        $("#eata").fadeIn(400);
         $("#attack").hide();
-        $("#"+this.enemySelectedValue+"-info").html("<h1>"+this.enemySelectedValue+"</h1>")
-        $("#resetDiv").html("<button type='button' class='btn btn-danger border border-warning pt-1' id='reset'>Reset</button>");
-        $("#resetDiv").detach().prependTo("#eata");
+        $("#" + this.enemySelectedValue + "-info").html("<h1>" + this.enemySelectedValue + "</h1>")
+        $("#resetDiv").html("<button type='button' class='btn btn-danger border border-warning p-1 m-1' id='reset'>Reset</button>");
+        $("#resetDiv").detach().appendTo("#eata");
         // $("#resetDiv").detach().prependTo("#defender");
         $("#flavor-text").html("<h1>Sorry... you LOSE. <p>You were defeated by: <span class='winner-font'>" + this.enemySelectedValue.toUpperCase() + "</span>.</p></h1>");
         $("#" + this.enemySelectedValue).removeClass().addClass("huge-img-lost border border-warning rounded");
@@ -585,12 +592,15 @@ var dbzObject = {
     youWin: function () {
         this.gameOver = true;
         $("#available-enemies").empty();
+        
+        $("#attackRow").detach().hide().prependTo("#wrapper");
         $("#available-enemies, #attack, #defender, #defenderP, #yourCharacterP").hide();
         $("#flavor-text").detach().prependTo("#eata").removeClass("col-3");
         // $("#defender").html("<p></p>");
         $("#attack").hide();
-        $("#"+this.characterSelectedValue+"-info").html("<h1 class='winner-font'>"+this.characterSelectedValue+"</h1>");
-        $("#resetDiv").html("<button type='button' class='btn btn-danger' id='reset'>Reset</button>")
+        $("#" + this.characterSelectedValue + "-info").html("<h1 class='winner-font'>" + this.characterSelectedValue + "</h1>");
+        $("#resetDiv").html("<button type='button' class='btn btn-danger border border-warning m-1 p-1' id='reset'>Reset</button>");
+        $("#resetDiv").detach().appendTo("#eata");
         $("#flavor-text").html("<h1>YOU WIN! <span class='winner-font'>" + this.characterSelectedValue.toUpperCase() + "</span> IS THE GREATEST FIGHTER IN THE UNIVERSE</h1>");
         $("#" + this.characterSelectedValue).removeClass("player-character-image").addClass("huge-img");
         this.resetFunction();
@@ -607,10 +617,11 @@ var dbzObject = {
 
         $("#reset").off().on("click", function () {
             $("#" + dbzObject.characterSelectedValue + "-div").empty();
+
             $("#resetDiv, #flavor-text, #your-character, #available-enemies, #defender").empty();
-            
-            $("#flavor-text").removeClass().html("<p>Click a character to choose your fighter!</p>").addClass("col-3").detach().insertAfter("#your-character");
-            
+
+            $("#flavor-text").removeClass().html("<p>Click a character to choose your fighter!</p>").addClass("col-3 align-self-center justify-content-center align-text-bottom border border-warning rounded").detach().insertAfter("#your-character");
+            $("#char").removeClass("arena-bg");
             $("#attack, #eata").hide();
             $("#available-enemies").html("<p>Enemies Available To Attack</p>");
             $("#available-enemies, #defender, #attack, #your-character").show();

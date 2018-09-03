@@ -95,21 +95,22 @@ img.defender-character-image {
     max-width: 270px;
     max-height: 360px;
     width: 100%;
-    background: #A02616;
+    background: rgba(160, 38, 22, 0.5);
+    
     height: 360px;
 }
 img.player-character-image {
     max-width: 270px;
     max-height: 360px;
     width: 100%;
-    background: #229540;
+    background: rgba(33, 149, 64, 0.5);
     height: 360px;
 }
 img.enemies-available {
     max-width: 270px;
     max-height: 360px;
     width: 100%;
-    background: #377989;
+    background: #37798a;
 }
 
 .flipped {
@@ -142,4 +143,22 @@ img.enemies-available {
     font-weight: 900;
     font-style: italic;
     font-size: 1.3em;
+}
+
+#char.arena-bg {
+    background-image: url("../images/arena.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#flavor-text {
+    
+    font-weight: bold;
+    background: rgba(160, 91, 22, 0.5);
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    letter-spacing: 0.25em;
 }
