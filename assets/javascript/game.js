@@ -46,7 +46,6 @@ var dbzObject = {
         counterAttack: 1805,
     },
 
-
     ],
     attackAudio: [
         "assets/audio/burning_fire.mp3",
@@ -55,16 +54,11 @@ var dbzObject = {
         "assets/audio/hard_punch.mp3",
         "assets/audio/mediumkick.mp3",
         "assets/audio/mediumpunch.mp3",
-        // "assets/audio/meleemisses.mp3",
         "assets/audio/prepunch1.mp3",
         "assets/audio/punch.mp3"
     ],
 
     defeatSound: new Audio('assets/audio/deathfall.mp3'),
-    // gokuSelect: this.characterListArray[0],
-    // krillinSelect: this.characterListArray[1],
-    // piccoloSelect: this.characterListArray[2],
-    // vegetaSelect: this.characterListArray[3],
 
     // list characters in #character-select
     displayCharacterSelect: function () {
@@ -93,103 +87,46 @@ var dbzObject = {
             newCharacterDivInfo.attr("id", this.characterListArray[i].name + "-info");
             newCharacterDivInfo.html("ATK: " + this.characterListArray[i].attackPower + " | <span class='charName'>" + this.characterListArray[i].name + "</span> | " + " " + "HP: " + this.characterListArray[i].healthPoints);
             $("#" + this.characterListArray[i].name + "-div").append(newCharacterDivInfo);
-
         }
-
     },
 
     // when a character is selected move selected character to "#your-character"
     playerSelectedCharacter: function () {
         if (this.characterSelected === false) {
-            var moveGokuEnemy = function () {
-                $("#Goku-div").detach().appendTo("#available-enemies");
-                $("#Goku").detach().appendTo("#Goku-div");
-                $("#Goku").addClass("enemies-available");
-                $("#Goku-info").detach().appendTo("#Goku-div");
+            var moveEnemy = function (enemy) {
+                console.log(enemy)
+                $("#" + enemy + "-div").detach().appendTo("#available-enemies");
+                $("#" + enemy).detach().appendTo("#" + enemy + "-div");
+                $("#" + enemy).addClass("enemies-available");
+                $("#" + enemy + "-info").detach().appendTo("#" + enemy + "-div");
             }
-            var moveKrillinEnemy = function () {
-                $("#Krillin-div").detach().appendTo("#available-enemies");
-                $("#Krillin").detach().appendTo("#Krillin-div");
-                $("#Krillin").addClass("enemies-available");
-                $("#Krillin-info").detach().appendTo("#Krillin-div");
-            }
+            var moveCharacter = function (player, enemy1, enemy2, enemy3) {
 
-            var movePiccoloEnemy = function () {
-                $("#Piccolo-div").detach().appendTo("#available-enemies");
-                $("#Piccolo").detach().appendTo("#Piccolo-div");
-                $("#Piccolo").addClass("enemies-available");
-                $("#Piccolo-info").detach().appendTo("#Piccolo-div");
+                $("#" + player + "-div").detach().prependTo("#your-character");
+                $(player).detach().appendTo("#" + player + "-div");
+                $("#" + player + "-info").detach().appendTo("#" + player + "-div");
+                $("#" + player).removeClass("character-image");
+                if (dbzObject.freshGame === true) {
+                    $("#" + player).addClass("player-character-image");
+                }
+                dbzObject.characterSelectedValue = player;
+                if (dbzObject.characterSelected === false) {
+                    moveEnemy(enemy1);
+                    moveEnemy(enemy2);
+                    moveEnemy(enemy3);
+                }
             }
-
-            var moveVegetaEnemy = function () {
-                $("#Vegeta-div").detach().appendTo("#available-enemies");
-                $("#Vegeta").detach().appendTo("#Vegeta-div");
-                $("#Vegeta").addClass("enemies-available");
-                $("#Vegeta-info").detach().appendTo("#Vegeta-div");
-            }
-
 
             $("#reset").off();
             $(".character-image").on("click", function () {
                 if ($(this).attr("value") === "Goku") {
-                    $("#Goku-div").detach().prependTo("#your-character");
-                    $(this).detach().appendTo("#Goku-div");
-                    $("#Goku-info").detach().appendTo("#Goku-div");
-                    $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) {
-                        $(this).addClass("player-character-image");
-                    }
-                    dbzObject.characterSelectedValue = "Goku";
-                    if (dbzObject.characterSelected === false) {
-                        moveKrillinEnemy();
-                        movePiccoloEnemy();
-                        moveVegetaEnemy();
-                    }
+                    moveCharacter("Goku", "Krillin", "Piccolo", "Vegeta");
                 } else if ($(this).attr("value") === "Krillin") {
-                    $("#Krillin-div").detach().prependTo("#your-character");
-                    $(this).detach().appendTo("#Krillin-div");
-                    $("#Krillin-info").detach().appendTo("#Krillin-div");
-                    $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) {
-                        $(this).addClass("player-character-image");
-                    }
-                    dbzObject.characterSelectedValue = "Krillin";
-                    $(".character-image").detach().appendTo("#available-enemies");
-                    if (dbzObject.characterSelected === false) {
-                        moveGokuEnemy();
-                        movePiccoloEnemy();
-                        moveVegetaEnemy();
-                    }
+                    moveCharacter("Krillin", "Goku", "Piccolo", "Vegeta");
                 } else if ($(this).attr("value") === "Piccolo") {
-                    $("#Piccolo-div").detach().prependTo("#your-character");
-                    $(this).detach().appendTo("#Piccolo-div");
-                    $("#Piccolo-info").detach().appendTo("#Piccolo-div");
-                    $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) {
-                        $(this).addClass("player-character-image");
-                    }
-                    dbzObject.characterSelectedValue = "Piccolo";
-                    $(".character-image").detach().appendTo("#available-enemies");
-                    if (dbzObject.characterSelected === false) {
-                        moveGokuEnemy();
-                        moveKrillinEnemy();
-                        moveVegetaEnemy();
-                    }
+                    moveCharacter("Piccolo", "Goku", "Krillin", "Vegeta");
                 } else if ($(this).attr("value") === "Vegeta") {
-                    $("#Vegeta-div").detach().prependTo("#your-character");
-                    $(this).detach().appendTo("#Vegeta-div");
-                    $("#Vegeta-info").detach().appendTo("#Vegeta-div");
-                    $(this).removeClass("character-image");
-                    if (dbzObject.freshGame === true) {
-                        $(this).addClass("player-character-image");
-                    }
-                    dbzObject.characterSelectedValue = "Vegeta";
-                    $(".character-image").detach().appendTo("#available-enemies");
-                    if (dbzObject.characterSelected === false) {
-                        moveGokuEnemy();
-                        movePiccoloEnemy();
-                        moveKrillinEnemy();
-                    }
+                    moveCharacter("Vegeta", "Goku", "Krillin", "Piccolo");
                 }
 
                 dbzObject.characterSelected = true;
@@ -218,46 +155,28 @@ var dbzObject = {
             $("#attackRow").detach().show().appendTo("#flavor-text");
         }
 
+
+        var theEnemy = function (enemy) {
+            $("#" + enemy + "-div").detach().prependTo("#defender");
+            $("#" + enemy).detach().appendTo("#" + enemy + "-div");
+            $("#" + enemy + "-info").detach().appendTo("#" + enemy + "-div");
+            dbzObject.enemySelectedValue = enemy;
+            $("#" + enemy).removeClass("character-image enemies-available");
+            if (dbzObject.gameOver === false) {
+                $("#" + enemy).addClass("defender-character-image flipped");
+            }
+        }
         if (this.enemySelected === false) {
             $(".character-image").off();
             $(".character-image").on("click", function () {
                 if ($(this).attr("value") === "Goku") {
-                    $("#Goku-div").detach().prependTo("#defender");
-                    $(this).detach().appendTo("#Goku-div");
-                    $("#Goku-info").detach().appendTo("#Goku-div");
-                    dbzObject.enemySelectedValue = "Goku";
-                    $(this).removeClass("character-image enemies-available");
-                    if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image flipped");
-                    }
+                    theEnemy("Goku");
                 } else if ($(this).attr("value") === "Krillin") {
-                    $("#Krillin-div").detach().prependTo("#defender");
-                    $(this).detach().appendTo("#Krillin-div");
-                    $("#Krillin-info").detach().appendTo("#Krillin-div");
-                    dbzObject.enemySelectedValue = "Krillin";
-                    $(this).removeClass("character-image enemies-available");
-                    if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image flipped");
-                    }
+                    theEnemy("Krillin");
                 } else if ($(this).attr("value") === "Piccolo") {
-                    $("#Piccolo-div").detach().prependTo("#defender");
-                    $(this).detach().appendTo("#Piccolo-div");
-                    $("#Piccolo-info").detach().appendTo("#Piccolo-div");
-                    dbzObject.enemySelectedValue = "Piccolo";
-                    $(this).removeClass("character-image enemies-available");
-                    if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image flipped");
-                    }
+                    theEnemy("Piccolo");
                 } else if ($(this).attr("value") === "Vegeta") {
-                    $("#Vegeta-div").detach().prependTo("#defender");
-                    $(this).detach().appendTo("#Vegeta-div");
-                    $("#Vegeta-info").detach().appendTo("#Vegeta-div");
-                    dbzObject.enemySelectedValue = "Vegeta";
-                    $(this).removeClass("character-image enemies-available");
-                    if (dbzObject.gameOver === false) {
-                        $(this).addClass("defender-character-image flipped");
-                    }
-
+                    theEnemy("Vegeta");
                 }
 
                 dbzObject.enemySelected = true;
@@ -567,6 +486,10 @@ var dbzObject = {
         return;
     },
 
+    // when all enemies are defeated show that the player has won and game is over
+    // then show restart button in #flavor-text
+
+    //youLose and youWin accomplish this
     youLose: function () {
 
         $(".character-image").off();
@@ -592,7 +515,7 @@ var dbzObject = {
     youWin: function () {
         this.gameOver = true;
         $("#available-enemies").empty();
-        
+
         $("#attackRow").detach().hide().prependTo("#wrapper");
         $("#available-enemies, #attack, #defender, #defenderP, #yourCharacterP").hide();
         $("#flavor-text").detach().prependTo("#eata").removeClass("col-3");
@@ -650,15 +573,6 @@ var dbzObject = {
         });
         return;
     }
-
-
-
-
-
-
-    // when all enemies are defeated show that the player has won and game is over
-    // then show restart button in #flavor-text
-
 };
 
 // START
