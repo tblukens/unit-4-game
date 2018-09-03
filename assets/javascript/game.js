@@ -45,6 +45,14 @@ var dbzObject = {
         constAttackPower: 1750,
         counterAttack: 1805,
     },
+    // {
+    //     name: 'Frieza',
+    //     healthPoints: 12950,
+    //     resetHP: 12950,
+    //     attackPower: 1750,
+    //     constAttackPower: 1750,
+    //     counterAttack: 1805,
+    // }
 
     ],
     attackAudio: [
@@ -100,7 +108,7 @@ var dbzObject = {
                 $("#" + enemy).addClass("enemies-available");
                 $("#" + enemy + "-info").detach().appendTo("#" + enemy + "-div");
             }
-            var moveCharacter = function (player, enemy1, enemy2, enemy3) {
+            var moveCharacter = function (player, enemy1, enemy2, enemy3, enemy4) {
 
                 $("#" + player + "-div").detach().prependTo("#your-character");
                 $(player).detach().appendTo("#" + player + "-div");
@@ -114,19 +122,22 @@ var dbzObject = {
                     moveEnemy(enemy1);
                     moveEnemy(enemy2);
                     moveEnemy(enemy3);
+                    moveEnemy(enemy4);
                 }
             }
 
             $("#reset").off();
             $(".character-image").on("click", function () {
                 if ($(this).attr("value") === "Goku") {
-                    moveCharacter("Goku", "Krillin", "Piccolo", "Vegeta");
+                    moveCharacter("Goku", "Krillin", "Piccolo", "Frieza", "Vegeta");
                 } else if ($(this).attr("value") === "Krillin") {
-                    moveCharacter("Krillin", "Goku", "Piccolo", "Vegeta");
+                    moveCharacter("Krillin", "Goku", "Piccolo", "Frieza", "Vegeta");
                 } else if ($(this).attr("value") === "Piccolo") {
-                    moveCharacter("Piccolo", "Goku", "Krillin", "Vegeta");
+                    moveCharacter("Piccolo", "Goku", "Krillin", "Frieza", "Vegeta");
                 } else if ($(this).attr("value") === "Vegeta") {
-                    moveCharacter("Vegeta", "Goku", "Krillin", "Piccolo");
+                    moveCharacter("Vegeta", "Goku", "Krillin", "Frieza", "Piccolo");
+                } else if ($(this).attr("value") === "Frieza") {
+                    moveCharacter("Frieza", "Goku", "Krillin", "Piccolo", "Vegeta");
                 }
 
                 dbzObject.characterSelected = true;
@@ -177,6 +188,8 @@ var dbzObject = {
                     theEnemy("Piccolo");
                 } else if ($(this).attr("value") === "Vegeta") {
                     theEnemy("Vegeta");
+                } else if ($(this).attr("value") === "Frieza") {
+                    theEnemy("Frieza");
                 }
 
                 dbzObject.enemySelected = true;
@@ -228,7 +241,7 @@ var dbzObject = {
             // $("#" + dbzObject.characterSelectedValue + "-info").text(playerCharacter.name + " " + playerCharacter.healthPoints);
             $("#" + dbzObject.characterSelectedValue + "-info").html("ATK: " + playerCharacter.attackPower + " | <span class='charName'>" + playerCharacter.name + "</span> | " + " " + "HP: " + playerCharacter.healthPoints);
             // $("#" + dbzObject.enemySelectedValue + "-info").text(defenderCharacter.name + " " + defenderCharacter.healthPoints);
-            $("#" + dbzObject.enemySelectedValue + "-info").html("ATK: " + defenderCharacter.attackPower + " | <span class='charName'>" + defenderCharacter.name + "</span> | " + " " + "HP: " + defenderCharacter.healthPoints);
+            $("#" + dbzObject.enemySelectedValue + "-info").html("ATK: " + defenderCharacter.counterAttack + " | <span class='charName'>" + defenderCharacter.name + "</span> | " + " " + "HP: " + defenderCharacter.healthPoints);
             $("#attackRow").detach().show().appendTo("#flavor-text");
 
             if (defenderCharacter.healthPoints <= 0 && playerCharacter.healthPoints > 0) {
@@ -243,6 +256,7 @@ var dbzObject = {
         var krillinSelect = this.characterListArray[1];
         var piccoloSelect = this.characterListArray[2];
         var vegetaSelect = this.characterListArray[3];
+        // var friezaSelect = this.characterListArray[4];
 
 
         $(".character-image").off();
@@ -259,6 +273,9 @@ var dbzObject = {
             } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(gokuSelect, vegetaSelect);
                 dbzObject.animationsAndSound(gokuSelect, vegetaSelect);
+            } else if (dbzObject.characterSelectedValue === "Goku" && dbzObject.enemySelectedValue === "Frieza") {
+                theRealBattleFunction(gokuSelect, friezaSelect);
+                dbzObject.animationsAndSound(gokuSelect, friezaSelect);
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(krillinSelect, gokuSelect);
                 dbzObject.animationsAndSound(krillinSelect, gokuSelect);
@@ -268,6 +285,9 @@ var dbzObject = {
             } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(krillinSelect, vegetaSelect);
                 dbzObject.animationsAndSound(krillinSelect, vegetaSelect);
+            } else if (dbzObject.characterSelectedValue === "Krillin" && dbzObject.enemySelectedValue === "Frieza") {
+                theRealBattleFunction(krillinSelect, friezaSelect);
+                dbzObject.animationsAndSound(krillinSelect, friezaSelect);
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(piccoloSelect, gokuSelect);
                 dbzObject.animationsAndSound(piccoloSelect, gokuSelect);
@@ -277,6 +297,9 @@ var dbzObject = {
             } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Vegeta") {
                 theRealBattleFunction(piccoloSelect, vegetaSelect);
                 dbzObject.animationsAndSound(piccoloSelect, vegetaSelect);
+            } else if (dbzObject.characterSelectedValue === "Piccolo" && dbzObject.enemySelectedValue === "Frieza") {
+                theRealBattleFunction(piccoloSelect, friezaSelect);
+                dbzObject.animationsAndSound(piccoloSelect, friezaSelect);
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Goku") {
                 theRealBattleFunction(vegetaSelect, gokuSelect);
                 dbzObject.animationsAndSound(vegetaSelect, gokuSelect);
@@ -286,6 +309,21 @@ var dbzObject = {
             } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Piccolo") {
                 theRealBattleFunction(vegetaSelect, piccoloSelect);
                 dbzObject.animationsAndSound(vegetaSelect, piccoloSelect);
+            } else if (dbzObject.characterSelectedValue === "Vegeta" && dbzObject.enemySelectedValue === "Frieza") {
+                theRealBattleFunction(vegetaSelect, friezaSelect);
+                dbzObject.animationsAndSound(vegetaSelect, friezaSelect);
+            } else if (dbzObject.characterSelectedValue === "Frieza" && dbzObject.enemySelectedValue === "Goku") {
+                theRealBattleFunction(friezaSelect, gokuSelect);
+                dbzObject.animationsAndSound(friezaSelect, gokuSelect);
+            } else if (dbzObject.characterSelectedValue === "Frieza" && dbzObject.enemySelectedValue === "Krillin") {
+                theRealBattleFunction(friezaSelect, krillinSelect);
+                dbzObject.animationsAndSound(friezaSelect, krillinSelect);
+            } else if (dbzObject.characterSelectedValue === "Frieza" && dbzObject.enemySelectedValue === "Piccolo") {
+                theRealBattleFunction(friezaSelect, piccoloSelect);
+                dbzObject.animationsAndSound(friezaSelect, piccoloSelect);
+            } else if (dbzObject.characterSelectedValue === "Frieza" && dbzObject.enemySelectedValue === "Vegeta") {
+                theRealBattleFunction(friezaSelect, vegetaSelect);
+                dbzObject.animationsAndSound(friezaSelect, vegetaSelect);
             }
         });
         return;
@@ -421,6 +459,7 @@ var dbzObject = {
         var krillinSelect = this.characterListArray[1];
         var piccoloSelect = this.characterListArray[2];
         var vegetaSelect = this.characterListArray[3];
+        // var friezaSelect = this.characterListArray[4];
         // when defender loses remove them
         // $("#" + this.enemySelectedValue + "-div").remove();
         this.hasAttacked = false;
@@ -452,25 +491,42 @@ var dbzObject = {
             enemyDefeatedFunction(gokuSelect, piccoloSelect);
         } else if (this.characterSelectedValue === "Goku" && this.enemySelectedValue === "Vegeta") {
             enemyDefeatedFunction(gokuSelect, vegetaSelect);
+        } else if (this.characterSelectedValue === "Goku" && this.enemySelectedValue === "Frieza") {
+            enemyDefeatedFunction(gokuSelect, friezaSelect);
         } else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Goku") {
             enemyDefeatedFunction(krillinSelect, gokuSelect);
         } else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Piccolo") {
             enemyDefeatedFunction(krillinSelect, piccoloSelect);
         } else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Vegeta") {
             enemyDefeatedFunction(krillinSelect, vegetaSelect);
-        } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Goku") {
+        }  else if (this.characterSelectedValue === "Krillin" && this.enemySelectedValue === "Frieza") {
+            enemyDefeatedFunction(krillinSelect, friezaSelect);
+        }else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Goku") {
             enemyDefeatedFunction(piccoloSelect, gokuSelect);
         } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Krillin") {
             enemyDefeatedFunction(piccoloSelect, krillinSelect);
         } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Vegeta") {
             enemyDefeatedFunction(piccoloSelect, vegetaSelect);
+        } else if (this.characterSelectedValue === "Piccolo" && this.enemySelectedValue === "Frieza") {
+            enemyDefeatedFunction(piccoloSelect, friezaSelect);
         } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Goku") {
             enemyDefeatedFunction(vegetaSelect, gokuSelect);
         } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Krillin") {
             enemyDefeatedFunction(vegetaSelect, krillinSelect);
         } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Piccolo") {
             enemyDefeatedFunction(vegetaSelect, piccoloSelect);
+        } else if (this.characterSelectedValue === "Vegeta" && this.enemySelectedValue === "Frieza") {
+            enemyDefeatedFunction(vegetaSelect, friezaSelect);
+        } else if (this.characterSelectedValue === "Frieza" && this.enemySelectedValue === "Goku") {
+            enemyDefeatedFunction(friezaSelect, gokuSelect);
+        } else if (this.characterSelectedValue === "Frieza" && this.enemySelectedValue === "Krillin") {
+            enemyDefeatedFunction(friezaSelect, krillinSelect);
+        } else if (this.characterSelectedValue === "Frieza" && this.enemySelectedValue === "Piccolo") {
+            enemyDefeatedFunction(friezaSelect, piccoloSelect);
+        } else if (this.characterSelectedValue === "Frieza" && this.enemySelectedValue === "Vegeta") {
+            enemyDefeatedFunction(friezaSelect, vegetaSelect);
         }
+
         if (gokuSelect.healthPoints > 0 && krillinSelect.healthPoints <= 0 && piccoloSelect.healthPoints <= 0 && vegetaSelect.healthPoints <= 0) {
             this.youWin();
         } else if (krillinSelect.healthPoints > 0 && gokuSelect.healthPoints <= 0 && piccoloSelect.healthPoints <= 0 && vegetaSelect.healthPoints <= 0) {
@@ -537,6 +593,7 @@ var dbzObject = {
         var krillinSelect = this.characterListArray[1];
         var piccoloSelect = this.characterListArray[2];
         var vegetaSelect = this.characterListArray[3];
+        // var friezaSelect = this.characterListArray[4];
 
         $("#reset").off().on("click", function () {
             $("#" + dbzObject.characterSelectedValue + "-div").empty();
@@ -560,11 +617,13 @@ var dbzObject = {
             krillinSelect.healthPoints = krillinSelect.resetHP;
             piccoloSelect.healthPoints = piccoloSelect.resetHP;
             vegetaSelect.healthPoints = vegetaSelect.resetHP;
+            // friezaSelect.healthPoints = friezaSelect.resetHP;
 
             gokuSelect.attackPower = gokuSelect.constAttackPower;
             krillinSelect.attackPower = krillinSelect.constAttackPower;
             piccoloSelect.attackPower = piccoloSelect.constAttackPower;
             vegetaSelect.attackPower = vegetaSelect.constAttackPower;
+            // friezaSelect.attackPower = friezaSelect.constAttackPower;
 
             dbzObject.displayCharacterSelect();
             if (dbzObject.characterSelected === false) {
