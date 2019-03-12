@@ -1,153 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Title</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
-        crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+      integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+      crossorigin="anonymous"
+    />
 
-        <style>
-        .won {
-            background: lightgreen;
-        }
-        .lost {
-            background: firebrick;
-            color: white;
-        }
-        .player {
-            font-weight: bold;
-        }
-        </style>
-</head>
+    <style>
+      .won {
+        background: lightgreen;
+      }
+      .lost {
+        background: firebrick;
+        color: white;
+      }
+      .player {
+        font-weight: bold;
+      }
+    </style>
+  </head>
 
-<body>
-
-
+  <body>
     <div class="container-fluid text-center" id="main-container">
-        <div class="row">
-            <div class="col">
-                <h1>Goku</h1>
-            </div>
+      <div class="row">
+        <div class="col">
+          <h1>Goku</h1>
         </div>
-        <div class="row">
-
-            <div class="form-group col">
-                <label for="gokuHealth">Goku Health</label>
-                <input type="number" class="form-control" name="gokuHealth" id="gokuHealth" aria-describedby="gokuHealthID" placeholder="15000">
-            </div>
-            <div class="form-group col">
-                <label for="gokuAttack">Goku Attack</label>
-                <input type="number" class="form-control" name="gokuAttack" id="gokuAttack" aria-describedby="gokuAttackID" placeholder="1350">
-            </div>
-
-            <div class="form-group col">
-                <label for="gokuCounter">Goku Counter</label>
-                <input type="number" class="form-control" name="gokuCounter" id="gokuCounter" aria-describedby="gokuCounterID" placeholder="1700">
-            </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="gokuHealth">Goku Health</label>
+          <input
+            type="number"
+            class="form-control"
+            name="gokuHealth"
+            id="gokuHealth"
+            aria-describedby="gokuHealthID"
+            value="15000"
+          />
         </div>
-
-        <div class="row">
-            <div class="col">
-                <h1>Krillin</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col">
-                <label for="krillinHealth">Krillin Health</label>
-                <input type="number" class="form-control" name="krillinHealth" id="krillinHealth" aria-describedby="krillinHealth" placeholder="16250">
-            </div>
-            <div class="form-group col">
-                <label for="krillinAttack">Krillin Attack</label>
-                <input type="number" class="form-control" name="krillinAttack" id="krillinAttack" aria-describedby="krillinAttack" placeholder="1150">
-            </div>
-            <div class="form-group col">
-                <label for="krillinCounter">Krillin Counter</label>
-                <input type="number" class="form-control" name="krillinCounter" id="krillinCounter" aria-describedby="krillinCounter" placeholder="1300">
-            </div>
+        <div class="form-group col">
+          <label for="gokuAttack">Goku Attack</label>
+          <input
+            type="number"
+            class="form-control"
+            name="gokuAttack"
+            id="gokuAttack"
+            aria-describedby="gokuAttackID"
+            value="1350"
+          />
         </div>
 
-        <div class="row">
-            <div class="col">
-                <h1>Piccolo</h1>
-            </div>
+        <div class="form-group col">
+          <label for="gokuCounter">Goku Counter</label>
+          <input
+            type="number"
+            class="form-control"
+            name="gokuCounter"
+            id="gokuCounter"
+            aria-describedby="gokuCounterID"
+            value="1700"
+          />
         </div>
-        <div class="row">
-            <div class="form-group col">
-                <label for="piccoloHealth">Piccolo Health</label>
-                <input type="number" class="form-control" name="piccoloHealth" id="piccoloHealth" aria-describedby="piccoloHealth" placeholder="15000">
-            </div>
-            <div class="form-group col">
-                <label for="piccoloAttack">Piccolo Attack</label>
-                <input type="number" class="form-control" name="piccoloAttack" id="piccoloAttack" aria-describedby="piccoloAttack" placeholder="1200">
-            </div>
+      </div>
 
-            <div class="form-group col">
-                <label for="piccoloCounter">Piccolo Counter</label>
-                <input type="number" class="form-control" name="piccoloCounter" id="piccoloCounter" aria-describedby="piccoloCounter" placeholder="1600">
-            </div>
+      <div class="row">
+        <div class="col">
+          <h1>Krillin</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="krillinHealth">Krillin Health</label>
+          <input
+            type="number"
+            class="form-control"
+            name="krillinHealth"
+            id="krillinHealth"
+            aria-describedby="krillinHealth"
+            value="16250"
+          />
+        </div>
+        <div class="form-group col">
+          <label for="krillinAttack">Krillin Attack</label>
+          <input
+            type="number"
+            class="form-control"
+            name="krillinAttack"
+            id="krillinAttack"
+            aria-describedby="krillinAttack"
+            value="1150"
+          />
+        </div>
+        <div class="form-group col">
+          <label for="krillinCounter">Krillin Counter</label>
+          <input
+            type="number"
+            class="form-control"
+            name="krillinCounter"
+            id="krillinCounter"
+            aria-describedby="krillinCounter"
+            value="1300"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h1>Piccolo</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="piccoloHealth">Piccolo Health</label>
+          <input
+            type="number"
+            class="form-control"
+            name="piccoloHealth"
+            id="piccoloHealth"
+            aria-describedby="piccoloHealth"
+            value="15000"
+          />
+        </div>
+        <div class="form-group col">
+          <label for="piccoloAttack">Piccolo Attack</label>
+          <input
+            type="number"
+            class="form-control"
+            name="piccoloAttack"
+            id="piccoloAttack"
+            aria-describedby="piccoloAttack"
+            value="1200"
+          />
         </div>
 
-        <div class="row">
-            <div class="col">
-                <h1>Vegeta</h1>
-            </div>
+        <div class="form-group col">
+          <label for="piccoloCounter">Piccolo Counter</label>
+          <input
+            type="number"
+            class="form-control"
+            name="piccoloCounter"
+            id="piccoloCounter"
+            aria-describedby="piccoloCounter"
+            value="1600"
+          />
         </div>
-        <div class="row">
-            <div class="form-group col">
-                <label for="vegetaHealth">Vegeta Health</label>
-                <input type="number" class="form-control" name="vegetaHealth" id="vegetaHealth" aria-describedby="vegetaHealth" placeholder="12250">
-            </div>
-            <div class="form-group col">
-                <label for="vegetaAttack">Vegeta Attack</label>
-                <input type="number" class="form-control" name="vegetaAttack" id="vegetaAttack" aria-describedby="vegetaAttack" placeholder="1750">
-            </div>
-            <div class="form-group col">
-                <label for="vegetaCounter">Vegeta Counter</label>
-                <input type="number" class="form-control" name="vegetaCounter" id="vegetaCounter" aria-describedby="vegetaCounter" placeholder="1950">
-            </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h1>Vegeta</h1>
         </div>
-
-
-        <div class="row text-center" id="buttons">
-            <div class="col text-center">
-                <input name="setVariables" id="setVariables" class="btn btn-warning btn-lg" type="button" value="Apply">
-            </div>
-            <div class="col text-center" id="runDiv">
-                <input name="runFunction" id="runFunction" class="btn btn-success btn-lg" type="button" value="Run Function">
-            </div>
-            <div class="col text-center" id="reset">
-                <input name="resetButton" id="resetButton" class="btn btn-danger btn-lg" type="button" value="Reset">
-            </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="vegetaHealth">Vegeta Health</label>
+          <input
+            type="number"
+            class="form-control"
+            name="vegetaHealth"
+            id="vegetaHealth"
+            aria-describedby="vegetaHealth"
+            value="12250"
+          />
         </div>
-        <div class="container-fluid m-0 w100" id="characters">
-            <div class="row mb-1" id="Goku">
-            </div>
-            <div class="row mb-1" id="Krillin">
-
-            </div>
-            <div class="row mb-1" id="Piccolo">
-
-            </div>
-            <div class="row" id="Vegeta">
-
-            </div>
+        <div class="form-group col">
+          <label for="vegetaAttack">Vegeta Attack</label>
+          <input
+            type="number"
+            class="form-control"
+            name="vegetaAttack"
+            id="vegetaAttack"
+            aria-describedby="vegetaAttack"
+            value="1750"
+          />
         </div>
+        <div class="form-group col">
+          <label for="vegetaCounter">Vegeta Counter</label>
+          <input
+            type="number"
+            class="form-control"
+            name="vegetaCounter"
+            id="vegetaCounter"
+            aria-describedby="vegetaCounter"
+            value="1950"
+          />
+        </div>
+      </div>
+
+      <div class="row text-center" id="buttons">
+        <div class="col text-center">
+          <input
+            name="setVariables"
+            id="setVariables"
+            class="btn btn-warning btn-lg"
+            type="button"
+            value="Apply"
+          />
+        </div>
+        <div class="col text-center" id="runDiv">
+          <input
+            name="runFunction"
+            id="runFunction"
+            class="btn btn-success btn-lg"
+            type="button"
+            value="Run Function"
+          />
+        </div>
+        <div class="col text-center" id="reset">
+          <input
+            name="resetButton"
+            id="resetButton"
+            class="btn btn-danger btn-lg"
+            type="button"
+            value="Reset"
+          />
+        </div>
+      </div>
+      <div class="container-fluid m-0 w100" id="characters">
+        <div class="row mb-1" id="Goku"></div>
+        <div class="row mb-1" id="Krillin"></div>
+        <div class="row mb-1" id="Piccolo"></div>
+        <div class="row" id="Vegeta"></div>
+      </div>
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+      integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+      crossorigin="anonymous"
+    ></script>
     <script src="test.js"></script>
-</body>
-
+  </body>
 </html>
